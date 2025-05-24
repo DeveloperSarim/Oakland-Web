@@ -1,24 +1,18 @@
+
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ChevronDown, ArrowRight } from 'lucide-react';
-import home from './assets/home.png'
-import homeImage from './assets/home.png';
+import home from './assets/home.png';
 import nature from './assets/Nature.png';
 import luxury from './assets/luxury.png';
 import footer from './assets/footer.png';
 import footer_back from './assets/footer-back.jpg';
+import './index.css';
+import { motion } from 'framer-motion';
 
-
-const OaklandGreensWebsite = () => {
-  const [currentSlide, setCurrentSlide] = useState(1);
-  const [expandedFaq, setExpandedFaq] = useState(0);
+// PropertySlider Component
+const PropertySlider = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-
-
-    const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
 
   const properties = [
     {
@@ -73,29 +67,148 @@ const OaklandGreensWebsite = () => {
     }
   ];
 
-  const blogPosts = [
+  const nextSlide = () => {
+    if (!isTransitioning) {
+      setIsTransitioning(true);
+      setCurrentSlide((prev) => (prev >= properties.length - 1 ? 0 : prev + 1));
+      setTimeout(() => setIsTransitioning(false), 500);
+    }
+  };
+
+  const prevSlide = () => {
+    if (!isTransitioning) {
+      setIsTransitioning(true);
+      setCurrentSlide((prev) => (prev <= 0 ? properties.length - 1 : prev - 1));
+      setTimeout(() => setIsTransitioning(false), 500);
+    }
+  };
+
+  const goToSlide = (index) => {
+    if (!isTransitioning && index !== currentSlide) {
+      setIsTransitioning(true);
+      setCurrentSlide(index);
+      setTimeout(() => setIsTransitioning(false), 500);
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => nextSlide(), 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="relative overflow-hidden">
+      <div
+        className="flex transition-transform duration-500 ease-in-out"
+        style={{
+          transform: `translateX(-${(currentSlide * 100) / (window.innerWidth > 1024 ? 3 : 1)}%)`,
+          width: `${properties.length * (window.innerWidth > 1024 ? 33.33 : 100)}%`
+        }}
+      >
+        {properties.map((property, index) => (
+          <div
+            key={property.id}
+            className="flex-shrink-0 w-full lg:w-1/3 px-3"
+            style={{ width: window.innerWidth > 1024 ? '33.33%' : '100%' }}
+          >
+            <div className="relative group cursor-pointer h-80">
+              <div className={`h-full bg-gradient-to-br ${property.gradient} rounded-2xl overflow-hidden relative shadow-lg hover:shadow-xl transition-all duration-300`}>
+                <img
+                  src={property.image}
+                  alt={property.name}
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-300"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-br ${property.gradient} opacity-60`}></div>
+
+                <div className="absolute bottom-6 left-6 text-white">
+                  <div className="text-2xl font-light mb-2">{property.price}</div>
+                  <h3 className="text-lg font-semibold mb-1">{property.name}</h3>
+                  <div className="flex space-x-3 text-sm opacity-90 mb-2">
+                    <span>{property.bedrooms} bed</span>
+                    <span>{property.bathrooms} bath</span>
+                  </div>
+                </div>
+
+                <button className="absolute top-4 right-4 w-10 h-10 bg-black/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                  <ArrowRight size={18} />
+                </button>
+              </div>
+
+              {currentSlide === index && (
+                <div className="mt-4 transform transition-all duration-300">
+                  <p className="text-gray-600 text-sm">{property.description}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105"
+        disabled={isTransitioning}
+      >
+        <ChevronLeft size={20} />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105"
+        disabled={isTransitioning}
+      >
+        <ChevronRight size={20} />
+      </button>
+
+      <div className="flex justify-center mt-8 space-x-2">
+        {properties.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-black w-8' : 'bg-gray-300 hover:bg-gray-400'}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const OaklandGreensWebsite = () => {
+  const [expandedFaq, setExpandedFaq] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState('Prime Locations');
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleClick = (item) => {
+    setSelectedItem(item);
+  };
+
+  const items = [
     {
-      title: "The Rise of Boutique Architecture in Luxury Living",
-      description: "Discover how boutique architecture is redefining luxury living with its focus on uniqueness, personalization, and timeless design.",
-      author: "Emily Chambers",
-      role: "Marketing Consultant",
-      category: "Must Read",
-      image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&h=300&fit=crop"
+      title: 'Prime Locations',
+      description: 'Our farmhouses are located in peaceful, private areas, giving you the perfect escape while still being close to modern conveniences. Enjoy the best of nature and luxury combined.',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=500&fit=crop',
+      gradient: 'from-blue-400/30 to-purple-600/30'
     },
     {
-      title: "The Future of Luxury: AI and Automation in Home Design",
-      category: "Technology",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop"
+      title: 'Modern Comfort',
+      description: 'Every home features state-of-the-art technology and premium finishes for ultimate comfort.',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=500&fit=crop',
+      gradient: 'from-green-400/30 to-yellow-600/30'
     },
     {
-      title: "Are Sustainable Materials the Future of Homes?",
-      category: "Sustainability",
-      image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=400&h=300&fit=crop"
+      title: 'State-of-the-Art Amenities',
+      description: 'From infinity pools to smart home systems, every amenity is designed for luxury living.',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=500&fit=crop',
+      gradient: 'from-red-400/30 to-yellow-600/30'
     },
     {
-      title: "Exploring Minimalism with a Touch of Luxury",
-      category: "Design",
-      image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=400&h=300&fit=crop"
+      title: 'Natural Beauty',
+      description: 'Surrounded by pristine landscapes and designed to complement natural surroundings.',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=500&fit=crop',
+      gradient: 'from-purple-400/30 to-pink-600/30'
     }
   ];
 
@@ -122,42 +235,35 @@ const OaklandGreensWebsite = () => {
     }
   ];
 
-  const nextSlide = () => {
-    if (!isTransitioning) {
-      setIsTransitioning(true);
-      setCurrentSlide((prev) => (prev >= properties.length - 1 ? 0 : prev + 1));
-      setTimeout(() => setIsTransitioning(false), 300);
+  const blogPosts = [
+    {
+      title: "The Rise of Boutique Architecture in Luxury Living",
+      description: "Discover how boutique architecture is redefining luxury living with its focus on uniqueness, personalization, and timeless design.",
+      author: "Emily Chambers",
+      role: "Marketing Consultant",
+      category: "Must Read",
+      image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&h=300&fit=crop"
+    },
+    {
+      title: "The Future of Luxury: AI and Automation in Home Design",
+      category: "Technology",
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop"
+    },
+    {
+      title: "Are Sustainable Materials the Future of Homes?",
+      category: "Sustainability",
+      image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=400&h=300&fit=crop"
+    },
+    {
+      title: "Exploring Minimalism with a Touch of Luxury",
+      category: "Design",
+      image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=400&h=300&fit=crop"
     }
-  };
-
-  const prevSlide = () => {
-    if (!isTransitioning) {
-      setIsTransitioning(true);
-      setCurrentSlide((prev) => (prev <= 0 ? properties.length - 1 : prev - 1));
-      setTimeout(() => setIsTransitioning(false), 300);
-    }
-  };
-
-  const goToSlide = (index) => {
-    if (!isTransitioning && index !== currentSlide) {
-      setIsTransitioning(true);
-      setCurrentSlide(index);
-      setTimeout(() => setIsTransitioning(false), 300);
-    }
-  };
-
-  // Auto-slide functionality
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  ];
 
   return (
-    
     <div className="bg-white">
-         <style jsx>{`
+      <style jsx>{`
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -266,11 +372,11 @@ const OaklandGreensWebsite = () => {
           transform: translateY(0);
         }
       `}</style>
-     <nav className="absolute top-0 left-0 right-0 z-50 p-6">
+
+      <nav className="absolute top-0 left-0 right-0 z-50 p-6">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <div className="text-white font-semibold text-xl">OAKLAND</div>
           
-          {/* Menu Button - Plus Icon (visible on all devices) */}
           <button 
             onClick={toggleMenu}
             className="text-white text-2xl font-light focus:outline-none z-60 relative"
@@ -283,9 +389,7 @@ const OaklandGreensWebsite = () => {
         </div>
       </nav>
 
-      {/* Full Page Menu Overlay */}
       <div className={`fixed inset-0 bg-black z-40 transition-all duration-500 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-        {/* Full screen menu content */}
         <div className="flex items-center justify-center h-full">
           <div className="text-center space-y-12">
             <a 
@@ -319,243 +423,242 @@ const OaklandGreensWebsite = () => {
           </div>
         </div>
       </div>
- {/* Hero Section */}
-      <section className="relative h-screen bg-gradient-to-b from-blue-400 to-blue-100 flex items-center justify-center">
-        <div className="text-center text-white z-20 mb-72">
-          <h1 className="text-6xl md:text-7xl font-light mb-4">
+
+      <section className="relative h-screen bg-gradient-to-b from-blue-400 to-blue-100 pt-24 pb-10 opacity-90">
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-center text-white z-20 mb-72 px-4"
+        >
+          <h1 className="text-4xl md:text-6xl font-light mb-4 leading-tight">
             Farmhouse<br />
-           Living Like Never Before
+            Living Like Never Before
           </h1>
-          <p className="text-lg  max-w-md mx-auto opacity-90">
+          <p className="text-base md:text-lg max-w-md mx-auto opacity-90 mb-2">
             Discover luxury living designed for the ultimate<br />
             living experience with swimming pools and modern<br />
             amenities.
           </p>
-          <button className='bg-white text-black px-3 py-2 rounded-2xl text-md'>Explore Payement Plan</button>
-        </div>
-        
-        {/* House Image */}
-   <div className="absolute top-98 left-1/2 transform -translate-x-1/2">
-  <div className="w-[450px] h-[300px] flex items-end justify-center">
-    <div className="w-[420px] h-[270px]">
-      <img
-        src={home}
-        alt="Home"
-        className="w-full h-full object-contain"
-      />
-      
-    </div>
-    {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white pointer-events-none" /> */}
-  </div>
-</div>
-   
+          <button className="bg-white text-black px-4 py-2 rounded-2xl text-md">
+            Explore Payment Plan
+          </button>
+        </motion.div>
 
+        <div className="absolute inset-0 pt-4 z-10">
+          <div className="relative h-full flex justify-center items-center">
+            <img
+              src={home}
+              alt="Home"
+              className="absolute pt-4 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 inset-0 w-82 h-full object-cover fade-in-out-image"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
+          </div>
+        </div>
       </section>
 
-      {/* Luxury Living Section */}
-    <section className="py-20">
-  <div className="max-w-4xl mx-auto text-center px-6">
-    <h2 className="text-5xl font-semibold mb-4">Its Luxury Living</h2>
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-5xl font-semibold mb-4"
+          >
+            It's Luxury Living
+          </motion.h2>
 
-    <div className="flex items-center justify-center mb-8">
-      <span className="text-4xl font-semibold">Embraced by</span>
-      
-      <div className="mx-4 w-24 h-12 rounded-full overflow-hidden flex items-center justify-center shadow-md border">
-        <img
-          src={nature}
-          alt="Nature"
-          className="w-full h-full object-cover"
-        />
-      </div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="flex items-center justify-center mb-8"
+          >
+            <span className="text-4xl font-semibold">Embraced by</span>
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="mx-4 w-24 h-12 rounded-full overflow-hidden flex items-center justify-center shadow-md border"
+            >
+              <img
+                src={nature}
+                alt="Nature"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+            <span className="text-4xl font-semibold">Nature.</span>
+          </motion.div>
 
-      <span className="text-4xl font-semibold">Nature.</span>
-    </div>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            viewport={{ once: true }}
+            className="text-gray-600 mb-12 max-w-2xl mx-auto"
+          >
+            Oakland Greens offers more than a home—it's a lifestyle. Crafted with precision and
+            surrounded by nature, each farmhouse reflects your unique style, blending luxury and
+            tranquility in perfect harmony.
+          </motion.p>
 
-    <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
-      Oakland Greens offers more than a home—it's a lifestyle. Crafted with precision and
-      surrounded by nature, each farmhouse reflects your unique style, blending luxury and
-      tranquility in perfect harmony.
-    </p>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            viewport={{ once: true }}
+            className="flex items-center justify-center"
+          >
+            <div className="flex items-center bg-gray-100 rounded-2xl overflow-hidden shadow-sm px-2">
+              <input
+                type="email"
+                placeholder="Your Email Address"
+                className="bg-transparent px-6 py-2 focus:outline-none w-64 text-sm placeholder-gray-500"
+              />
+              <button className="bg-black text-white px-8 py-3 text-sm font-medium rounded-2xl hover:bg-gray-800 transition">
+                Stay Updated
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-   <div className="flex items-center justify-center">
-  <div className="flex items-center bg-gray-100 rounded-2xl overflow-hidden shadow-sm px-2">
-    <input 
-      type="email" 
-      placeholder="Your Email Address" 
-      className="bg-transparent px-6 py-2 focus:outline-none w-64 text-sm placeholder-gray-500"
-    />
-    <button className="bg-black text-white px-8 py-3 text-sm font-medium rounded-2xl hover:bg-gray-800 transition">
-      Stay Updated
-    </button>
-  </div>
-</div>
-
-  </div>
-</section>
-
-      {/* Properties Section with Smooth Slider */}
-           <section className="py-20 bg-white">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-         <div className="flex justify-center mb-8 relative w-54 h-50">
-  {/* Image */}
-  <img src={luxury} alt="" className="rounded-lg" />
-
-  {/* Gradient Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white pointer-events-none" />
-</div>
-
-       
-
-
+          <div className="flex justify-center mb-8 relative w-54 h-50">
+            <img src={luxury} alt="" className="rounded-lg" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white pointer-events-none" />
+          </div>
 
           <div className="flex justify-between items-start mb-16">
-            <div>
-              <h2 className="text-4xl font-light mb-4">Explore Our Luxury<br />Farmhouses.</h2>
-            </div>
-            <div className="text-right">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl font-light mb-4">
+                Explore Our Luxury<br />Farmhouses.
+              </h2>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="text-right"
+            >
               <p className="text-gray-600 mb-2">Exclusive Luxury Farmhouses</p>
               <p className="text-gray-600">Crafted for You.</p>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Smooth Property Slider */}
-          <div className="relative overflow-hidden">
-            <div 
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentSlide * 25}%)` }}
-            >
-              {properties.map((property, index) => (
-                <div key={property.id} className="flex-shrink-0 w-1/4 px-3">
-                  <div className="relative group cursor-pointer h-80">
-                    <div className={`h-full bg-gradient-to-br ${property.gradient} rounded-2xl overflow-hidden relative shadow-lg hover:shadow-xl transition-all duration-300`}>
-                      <img 
-                        src={property.image} 
-                        alt={property.name}
-                        className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-300"
-                      />
-                      <div className={`absolute inset-0 bg-gradient-to-br ${property.gradient} opacity-60`}></div>
-                      
-                      <div className="absolute bottom-6 left-6 text-white">
-                        <div className="text-2xl font-light mb-2">{property.price}</div>
-                        <h3 className="text-lg font-semibold mb-1">{property.name}</h3>
-                        <div className="flex space-x-3 text-sm opacity-90 mb-2">
-                          <span>{property.bedrooms} bed</span>
-                          <span>{property.bathrooms} bath</span>
-                        </div>
-                      </div>
-                      
-                      <button className="absolute top-4 right-4 w-10 h-10 bg-black/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
-                        <ArrowRight size={18} />
-                      </button>
-                    </div>
-                    
-                    {currentSlide === index && (
-                      <div className="mt-4 transform transition-all duration-300">
-                        <p className="text-gray-600 text-sm">{property.description}</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Navigation Buttons */}
-            <button 
-              onClick={prevSlide}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105"
-              disabled={isTransitioning}
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button 
-              onClick={nextSlide}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105"
-              disabled={isTransitioning}
-            >
-              <ChevronRight size={20} />
-            </button>
-
-            {/* Dots Indicator */}
-            <div className="flex justify-center mt-8 space-x-2">
-              {properties.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    currentSlide === index 
-                      ? 'bg-black w-8' 
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
+          <PropertySlider />
         </div>
       </section>
 
-      {/* Exceptional Living Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-light mb-4">Exceptional Living Begins<br />with Every Detail.</h2>
-            <p className="text-gray-600">Discover the Details That Make Every Oakland Greens Home a Masterpiece.</p>
-          </div>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl font-light mb-4">
+              Exceptional Living Begins<br />with Every Detail.
+            </h2>
+            <p className="text-gray-600">
+              Discover the Details That Make Every Oakland Greens Home a Masterpiece.
+            </p>
+          </motion.div>
 
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <div className="border-l-4 border-black pl-6">
-                <h3 className="text-xl font-semibold mb-2">Prime Locations</h3>
-                <p className="text-gray-600">Our farmhouses are located in peaceful, private areas, giving you the perfect escape while still being close to modern conveniences. Enjoy the best of nature and luxury combined.</p>
-              </div>
-              
-              <div className="pl-6">
-                <h3 className="text-xl font-semibold mb-2">Modern Comfort</h3>
-                <p className="text-gray-600">Every home features state-of-the-art technology and premium finishes for ultimate comfort.</p>
-              </div>
-              
-              <div className="pl-6">
-                <h3 className="text-xl font-semibold mb-2">State-of-the-Art Amenities</h3>
-                <p className="text-gray-600">From infinity pools to smart home systems, every amenity is designed for luxury living.</p>
-              </div>
-              
-              <div className="pl-6">
-                <h3 className="text-xl font-semibold mb-2">Natural Beauty</h3>
-                <p className="text-gray-600">Surrounded by pristine landscapes and designed to complement natural surroundings.</p>
-              </div>
-            </div>
+            <motion.div 
+              className="space-y-8"
+              initial="hidden"
+              whileInView="visible"
+              transition={{ staggerChildren: 0.2 }}
+              viewport={{ once: true }}
+            >
+              {items.map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="border-l-4 border-black pl-6 cursor-pointer"
+                  onClick={() => handleClick(item.title)}
+                  variants={{
+                    hidden: { opacity: 0, x: -40 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+                  }}
+                >
+                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  <p className="text-gray-600">{item.description}</p>
+                </motion.div>
+              ))}
+            </motion.div>
 
-            <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-blue-200 to-purple-400 rounded-2xl overflow-hidden shadow-xl">
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <div className="aspect-square bg-gradient-to-br rounded-2xl overflow-hidden shadow-xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=500&fit=crop"
-                  alt="Luxury Interior"
+                  src={items.find(item => item.title === selectedItem).image}
+                  alt={selectedItem}
                   className="w-full h-full object-cover opacity-80"
                 />
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 to-purple-600/30"></div>
+                <motion.div
+                  className={`absolute inset-0 bg-gradient-to-br ${items.find(item => item.title === selectedItem).gradient}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.6 }}
+                />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Blog Section */}
-   <section className="py-20 bg-white">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-start mb-16">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
               <h2 className="text-5xl font-normal leading-tight">
                 Discover insights,<br />
                 trends, and inspiration.
               </h2>
-            </div>
-            <button className="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition flex items-center text-sm font-medium">
+            </motion.div>
+            <motion.button
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition flex items-center text-sm font-medium"
+            >
               View all <ArrowRight size={16} className="ml-2" />
-            </button>
+            </motion.button>
           </div>
 
-          {/* Featured Article */}
           <div className="grid md:grid-cols-2 gap-12 items-start mb-16">
-            <div className="relative">
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="relative"
+            >
               <div className="aspect-[4/3] rounded-3xl overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=450&fit=crop"
@@ -564,9 +667,16 @@ const OaklandGreensWebsite = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-purple-600/20 via-pink-500/10 to-blue-400/30"></div>
               </div>
-            </div>
-            <div className="flex flex-col justify-center">
-              <span className="bg-black text-white px-4 w-32 py-2 rounded-full text-sm   mb-6">Must Read</span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="flex flex-col justify-center"
+            >
+              <span className="bg-black text-white px-4 w-32 py-2 rounded-full text-sm mb-6">Must Read</span>
               <h3 className="text-3xl font-normal mb-4 leading-snug">
                 The Rise of Boutique Architecture in Luxury Living
               </h3>
@@ -585,14 +695,18 @@ const OaklandGreensWebsite = () => {
                 </div>
                 <span className="bg-orange-600 text-white px-4 py-2 rounded-full text-sm">Lifestyle</span>
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Bottom Articles Grid */}
           <div className="grid md:grid-cols-3 gap-8">
-            {/* AI and Automation Article */}
-            <div className="group cursor-pointer">
-              <div className="aspect-[4/3] rounded-3xl mb-6 overflow-hidden">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="group cursor-pointer"
+            >
+              <div className="aspect-[4/3] rounded-3xl mb-6 overflow-hidden relative">
                 <img 
                   src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop"
                   alt="AI Technology"
@@ -604,11 +718,16 @@ const OaklandGreensWebsite = () => {
               <h3 className="text-xl font-medium mt-4 group-hover:text-gray-600 transition leading-snug">
                 The Future of Luxury: AI and Automation in Home Design
               </h3>
-            </div>
+            </motion.div>
 
-            {/* Sustainable Materials Article */}
-            <div className="group cursor-pointer">
-              <div className="aspect-[4/3] rounded-3xl mb-6 overflow-hidden">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="group cursor-pointer"
+            >
+              <div className="aspect-[4/3] rounded-3xl mb-6 overflow-hidden relative">
                 <img 
                   src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=400&h=300&fit=crop"
                   alt="Sustainable Home"
@@ -620,11 +739,16 @@ const OaklandGreensWebsite = () => {
               <h3 className="text-xl font-medium mt-4 group-hover:text-gray-600 transition leading-snug">
                 Are Sustainable Materials the Future of Homes?
               </h3>
-            </div>
+            </motion.div>
 
-            {/* Minimalism Article */}
-            <div className="group cursor-pointer">
-              <div className="aspect-[4/3] rounded-3xl mb-6 overflow-hidden">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="group cursor-pointer"
+            >
+              <div className="aspect-[4/3] rounded-3xl mb-6 overflow-hidden relative">
                 <img 
                   src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=400&h=300&fit=crop"
                   alt="Minimalist Interior"
@@ -636,12 +760,11 @@ const OaklandGreensWebsite = () => {
               <h3 className="text-xl font-medium mt-4 group-hover:text-gray-600 transition leading-snug">
                 Exploring Minimalism with a Touch of Luxury
               </h3>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16">
@@ -678,60 +801,77 @@ const OaklandGreensWebsite = () => {
         </div>
       </section>
 
-   
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        style={{
+          backgroundImage: `url(${footer_back})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="absolute inset-0 flex items-end justify-center ">
+          <div className="flex space-x-8">
+            <img 
+              src={footer} 
+              alt="House 1"
+              className="w-22 h-60 flex align-end object-cover rounded-lg opacity-80"
+            />
+          </div>
+        </div>
+        
+        <motion.div
+          className="relative z-10 text-center text-white px-4"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <motion.h2
+            className="text-4xl md:text-6xl font-bold mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Your dream <br />
+            home awaits.
+          </motion.h2>
 
-<section className="relative min-h-screen flex items-center justify-center overflow-hidden"
-  style={{
-    backgroundImage: `url(${footer_back})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat'
-  }}
->
-  {/* Second layer - Two smaller images */}
-  <div className="absolute inset-0 flex items-end justify-center ">
-    <div className="flex space-x-8">
-      {/* Left smaller image */}
-      <img 
-        src={footer} // Replace with your second image variable
-        alt="House 1"
-        className="w-82 h-full flex align-end object-cover rounded-lg opacity-80"
-      />
-     
-    </div>
-  </div>
-  
-  {/* Top layer - Text content */}
-  <div className="relative z-10 text-center text-white px-4">
-    <h2 className="text-4xl md:text-6xl font-bold mb-6">
-      Your dream <br />
-      home awaits.
-    </h2>
-    
-    <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-      Whether you're exploring our homes or envisioning 
-      something custom, we're here to bring your dream to life.
-    </p>
-    
-    <button className="bg-white text-black px-6 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
-      Get In Touch
-    </button>
-  </div>
-  
-  {/* Footer positioned at bottom of this section */}
-  <footer className="absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
-    <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-      <div className="flex space-x-8">
-        <a href="#" className="hover:text-gray-300 transition decoration-none">Contact</a>
-        <a href="#" className="hover:text-gray-300 transition">Privacy Policy</a>
-        <a href="#" className="hover:text-gray-300 transition">Terms</a>
-      </div>
-      <div className="text-sm text-gray-400">
-        © 2025 Oakland Greens. All rights reserved.
-      </div>
-    </div>
-  </footer>
-</section>
+          <motion.p
+            className="text-lg md:text-xl mb-8 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Whether you're exploring our homes or envisioning
+            something custom, we're here to bring your dream to life.
+          </motion.p>
+
+          <motion.button
+            className="bg-white text-black px-6 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            Get In Touch
+          </motion.button>
+        </motion.div>
+        
+        <footer className="absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
+          <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div className="flex space-x-8 decoration-none">
+              <a href="#" className="hover:text-gray-300 transition decoration-none">Contact</a>
+              <a href="#" className="hover:text-gray-300 transition">Privacy Policy</a>
+              <a href="#" className="hover:text-gray-300 transition">Terms</a>
+            </div>
+            <div className="text-sm text-gray-400">
+              © 2025 Oakland Greens. All rights reserved.
+            </div>
+          </div>
+        </footer>
+      </section>
     </div>
   );
 };
