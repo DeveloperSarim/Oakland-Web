@@ -9,10 +9,19 @@ import './index.css';
 import { motion } from 'framer-motion';
 import Payment_Plan from './assets/Payment-Plan.pdf';
 
+
+
 // PropertySlider Component
 const PropertySlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
 
   const properties = [
     {
@@ -434,6 +443,13 @@ const OaklandGreensWebsite = () => {
             >
               Contact
             </a>
+             <a 
+              href="#" 
+              className="block text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-all duration-300 hover:scale-110"
+              onClick={toggleMenu}
+            >
+              Downloads
+            </a>
           </div>
         </div>
       </div>
@@ -468,7 +484,7 @@ const OaklandGreensWebsite = () => {
               src={home}
               alt="Home"
               className="absolute top-1/2 left-1/2 transform homes -translate-x-1/2 -translate-y-1/2 inset-0 object-cover fade-in-out-image"
-              style={{ width: 702, marginTop: '122px' }}
+              style={{ width: 802, marginTop: '122px' }}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
           </div>
