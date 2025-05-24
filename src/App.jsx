@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ChevronDown, ArrowRight } from 'lucide-react';
 import home from './assets/home.png';
@@ -8,6 +7,7 @@ import footer from './assets/footer.png';
 import footer_back from './assets/footer-back.jpg';
 import './index.css';
 import { motion } from 'framer-motion';
+import Payment_Plan from './assets/Payment-Plan.pdf';
 
 // PropertySlider Component
 const PropertySlider = () => {
@@ -23,7 +23,7 @@ const PropertySlider = () => {
       bathrooms: 3.5,
       image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&h=400&fit=crop",
       description: "Modern luxury villa with panoramic views and contemporary design.",
-      gradient: "from-blue-400 to-purple-600"
+      gradient: ""
     },
     { 
       id: 2,
@@ -61,7 +61,7 @@ const PropertySlider = () => {
       price: "$2,750,000",
       bedrooms: 5,
       bathrooms: 4,
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=500&h=400&fit=crop",
       description: "Luxurious living with breathtaking sunset views and modern amenities.",
       gradient: "from-amber-400 to-orange-600"
     }
@@ -99,7 +99,7 @@ const PropertySlider = () => {
   return (
     <div className="relative overflow-hidden">
       <div
-        className="flex transition-transform duration-500 ease-in-out"
+        className="flex transition-transform duration-500 ease-in-out "
         style={{
           transform: `translateX(-${(currentSlide * 100) / (window.innerWidth > 1024 ? 3 : 1)}%)`,
           width: `${properties.length * (window.innerWidth > 1024 ? 33.33 : 100)}%`
@@ -135,7 +135,7 @@ const PropertySlider = () => {
               </div>
 
               {currentSlide === index && (
-                <div className="mt-4 transform transition-all duration-300">
+                <div className="P-2 PY-2 mt-4 transform transition-all duration-300">
                   <p className="text-gray-600 text-sm">{property.description}</p>
                 </div>
               )}
@@ -185,44 +185,58 @@ const OaklandGreensWebsite = () => {
     setSelectedItem(item);
   };
 
+  const handleButtonClick = () => {
+    try {
+      if (Payment_Plan) {
+        window.open(Payment_Plan, '_blank');
+      } else {
+        console.error('Payment_Plan is undefined');
+        alert('Failed to open the payment plan file. Please ensure the file is correctly placed in the assets folder.');
+      }
+    } catch (error) {
+      console.error('Error opening payment plan file:', error);
+      alert('An error occurred while opening the payment plan file.');
+    }
+  };
+
   const items = [
     {
       title: 'Prime Locations',
       description: 'Our farmhouses are located in peaceful, private areas, giving you the perfect escape while still being close to modern conveniences. Enjoy the best of nature and luxury combined.',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=500&fit=crop',
+      image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=500&h=400&fit=crop',
       gradient: 'from-blue-400/30 to-purple-600/30'
     },
     {
       title: 'Modern Comfort',
       description: 'Every home features state-of-the-art technology and premium finishes for ultimate comfort.',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=500&fit=crop',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=400&fit=crop',
       gradient: 'from-green-400/30 to-yellow-600/30'
     },
     {
       title: 'State-of-the-Art Amenities',
       description: 'From infinity pools to smart home systems, every amenity is designed for luxury living.',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=500&fit=crop',
+      image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=500&h=400&fit=crop',
       gradient: 'from-red-400/30 to-yellow-600/30'
     },
     {
       title: 'Natural Beauty',
       description: 'Surrounded by pristine landscapes and designed to complement natural surroundings.',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=500&fit=crop',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&h=400&fit=crop',
       gradient: 'from-purple-400/30 to-pink-600/30'
     }
   ];
 
   const faqs = [
     {
-      question: "Can I customize the design of a Haven home?",
-      answer: "Absolutely. Each Haven home is tailored to reflect your unique vision. From layouts to finishes, we work with you to create a space that perfectly suits your style and needs."
+      question: "Can I customize the design of a Oakland?",
+      answer: "Absolutely. Each Oakland is tailored to reflect your unique vision. From layouts to finishes, we work with you to create a space that perfectly suits your style and needs."
     },
     {
       question: "Where are Oakland Greens located?",
       answer: "Our properties are located in prime locations across the region, carefully selected for their natural beauty and accessibility to modern conveniences."
     },
     {
-      question: "What is the process for purchasing a Haven home?",
+      question: "What is the process for purchasing a Oakland?",
       answer: "Our process involves consultation, design, approval, and construction phases, with dedicated support throughout your journey."
     },
     {
@@ -425,37 +439,41 @@ const OaklandGreensWebsite = () => {
       </div>
 
       <section className="relative h-screen bg-gradient-to-b from-blue-400 to-blue-100 pt-24 pb-10 opacity-90">
-  <motion.div
-    initial={{ opacity: 0, y: 100 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 1, ease: "easeOut" }}
-    className="text-center text-white z-20 mb-72 px-4"
-  >
-    <h1 className="text-4xl md:text-6xl font-light mb-4 hero leading-tight">
-      Farmhouse<br />
-      Living Like Never Before
-    </h1>
-    <p className="text-base md:text-lg max-w-md mx-auto opacity-90 mb-2">
-      Discover luxury living designed for the ultimate<br />
-      living experience with swimming pools and modern<br />
-      amenities.
-    </p>
-    <button className="bg-white text-black px-4 py-2 rounded-2xl text-md">
-      Explore Payment Plan
-    </button>
-  </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-center text-white z-20 mb-72 px-4"
+        >
+          <h1 className="text-4xl md:text-6xl font-light mb-4 hero leading-tight">
+            Farmhouse<br />
+            Living Like Never Before
+          </h1>
+          <p className="text-base md:text-lg max-w-md mx-auto opacity-90 mb-2">
+            Discover luxury living designed for the ultimate<br />
+            living experience with swimming pools and modern<br />
+            amenities.
+          </p>
+          <button
+            className="bg-white text-black px-4 py-2 rounded-2xl text-md"
+            onClick={handleButtonClick}
+          >
+            Explore Payment Plan
+          </button>
+        </motion.div>
 
-  <div className="absolute inset-0 pt-4 z-10">
-    <div className="relative h-full flex justify-center  items-center">
-      <img
-        src={home}
-        alt="Home"
-        className="absolute pt-4 top-1/2 left-1/2 transform homes -translate-x-1/2 -translate-y-1/2 inset-0 w-82 h-full object-cover fade-in-out-image"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
-    </div>
-  </div>
-</section>
+        <div className="absolute inset-0 pt-4 z-10">
+          <div className="relative h-full flex justify-center items-center">
+            <img
+              src={home}
+              alt="Home"
+              className="absolute top-1/2 left-1/2 transform homes -translate-x-1/2 -translate-y-1/2 inset-0 object-cover fade-in-out-image"
+              style={{ width: 702, marginTop: '122px' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
+          </div>
+        </div>
+      </section>
 
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto luxury text-center px-6">
@@ -848,15 +866,9 @@ const OaklandGreensWebsite = () => {
             something custom, we're here to bring your dream to life.
           </motion.p>
 
-          <motion.button
-            className="bg-white text-black px-6 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            Get In Touch
-          </motion.button>
+        <button className="bg-white text-black px-8  py-2 rounded-2xl text-md">
+      Get Plan
+    </button>
         </motion.div>
         
         <footer className="absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
