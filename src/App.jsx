@@ -425,40 +425,40 @@ const OaklandGreensWebsite = () => {
       </div>
 
       <section className="relative h-screen bg-gradient-to-b from-blue-400 to-blue-100 pt-24 pb-10 opacity-90">
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="text-center text-white z-20 mb-72 px-4"
-        >
-          <h1 className="text-4xl md:text-6xl font-light mb-4 leading-tight">
-            Farmhouse<br />
-            Living Like Never Before
-          </h1>
-          <p className="text-base md:text-lg max-w-md mx-auto opacity-90 mb-2">
-            Discover luxury living designed for the ultimate<br />
-            living experience with swimming pools and modern<br />
-            amenities.
-          </p>
-          <button className="bg-white text-black px-4 py-2 rounded-2xl text-md">
-            Explore Payment Plan
-          </button>
-        </motion.div>
+  <motion.div
+    initial={{ opacity: 0, y: 100 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1, ease: "easeOut" }}
+    className="text-center text-white z-20 mb-72 px-4"
+  >
+    <h1 className="text-4xl md:text-6xl font-light mb-4 hero leading-tight">
+      Farmhouse<br />
+      Living Like Never Before
+    </h1>
+    <p className="text-base md:text-lg max-w-md mx-auto opacity-90 mb-2">
+      Discover luxury living designed for the ultimate<br />
+      living experience with swimming pools and modern<br />
+      amenities.
+    </p>
+    <button className="bg-white text-black px-4 py-2 rounded-2xl text-md">
+      Explore Payment Plan
+    </button>
+  </motion.div>
 
-        <div className="absolute inset-0 pt-4 z-10">
-          <div className="relative h-full flex justify-center items-center">
-            <img
-              src={home}
-              alt="Home"
-              className="absolute pt-4 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 inset-0 w-82 h-full object-cover fade-in-out-image"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
-          </div>
-        </div>
-      </section>
+  <div className="absolute inset-0 pt-4 z-10">
+    <div className="relative h-full flex justify-center  items-center">
+      <img
+        src={home}
+        alt="Home"
+        className="absolute pt-4 top-1/2 left-1/2 transform homes -translate-x-1/2 -translate-y-1/2 inset-0 w-82 h-full object-cover fade-in-out-image"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
+    </div>
+  </div>
+</section>
 
       <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto text-center px-6">
+        <div className="max-w-4xl mx-auto luxury text-center px-6">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -474,15 +474,15 @@ const OaklandGreensWebsite = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="flex items-center justify-center mb-8"
+            className="flex items-center  justify-center mb-8 nature"
           >
-            <span className="text-4xl font-semibold">Embraced by</span>
+            <span className="text-5xl font-semibold">Embraced by</span>
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="mx-4 w-24 h-12 rounded-full overflow-hidden flex items-center justify-center shadow-md border"
+              className="mx-4 w-24 h-12 rounded-full overflow-hidden luxury flex items-center justify-center shadow-md border"
             >
               <img
                 src={nature}
@@ -490,7 +490,7 @@ const OaklandGreensWebsite = () => {
                 className="w-full h-full object-cover"
               />
             </motion.div>
-            <span className="text-4xl font-semibold">Nature.</span>
+            <span className="text-5xl font-semibold">Nature.</span>
           </motion.div>
 
           <motion.p
@@ -628,7 +628,7 @@ const OaklandGreensWebsite = () => {
 
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-start mb-16">
+          <div className="flex insights justify-between items-start mb-16">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -820,7 +820,7 @@ const OaklandGreensWebsite = () => {
         </div>
         
         <motion.div
-          className="relative z-10 text-center text-white px-4"
+          className="relative z-10 text-center text-white px-4 footers"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
