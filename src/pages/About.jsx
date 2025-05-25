@@ -214,16 +214,16 @@ Take a glimpse into your future home — designed to inspire, built to last.
   </div>
 
   {/* ✅ Responsive Grid */}
- <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-2 gap-y-2 justify-items-center">
-  <img src={about1} alt="img1" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '350px' }} />
-  <img src={about2} alt="img2" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '310px' }} />
-  <img src={about3} alt="img3" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '330px' }} />
-  <img src={about4} alt="img4" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '280px' }} />
-  <img src={about5} alt="img5" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '300px' }} />
-  <img src={about6} alt="img6" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '300px' }} />
-  <img src={about7} alt="img7" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '300px' }} />
-  <img src={about8} alt="img8" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '300px' }} />
-</div>
+ <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {images.slice(0, 8).map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            alt={`gallery-${index}`}
+            className="w-full h-64 object-cover rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
+          />
+        ))}
+      </div>
 
 </div>
 
