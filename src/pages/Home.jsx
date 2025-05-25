@@ -447,7 +447,12 @@ const OaklandGreensWebsite = () => {
             {['Home', 'About', 'Contact', 'Careers'].map((label) => (
               <a
                 key={label}
-                href="#"
+                href={
+                  label === 'Home' ? '/' :
+                  label === 'About' ? '/about' :
+                  label === 'Contact' ? '/contact' :
+                  label === 'Careers' ? '/careers' : '#'
+                }
                 onClick={toggleMenu}
                 className="block text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-transform duration-300 hover:scale-110"
               >
