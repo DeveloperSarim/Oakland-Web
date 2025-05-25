@@ -9,20 +9,13 @@ import './index.css';
 import { motion } from 'framer-motion';
 import Payment_Plan from './assets/Payment-Plan.pdf';
 
-
-
 // PropertySlider Component
 const PropertySlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
 
-  const [selectedOption, setSelectedOption] = useState('');
-
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-
+  
   const properties = [
     {
       id: 1,
@@ -186,9 +179,39 @@ const OaklandGreensWebsite = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState('Prime Locations');
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDownloadDropdownOpen, setIsDownloadDropdownOpen] = useState(false);
+
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsMenuOpen(!isMenuOpen);
+    setIsDownloadDropdownOpen(false);
   };
+
+  const toggleDownloadDropdown = (e) => {
+    e.preventDefault();
+    setIsDownloadDropdownOpen(!isDownloadDropdownOpen);
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (!e.target.closest('.download-dropdown')) {
+        setIsDownloadDropdownOpen(false);
+      }
+    };
+
+    if (isDownloadDropdownOpen) {
+      document.addEventListener('click', handleOutsideClick);
+    } else {
+      document.removeEventListener('click', handleOutsideClick);
+    }
+
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, [isDownloadDropdownOpen]);
+
+
+  // const toggleMenu = () => {
+  //   setIsOpen(!isOpen);
+  // };
 
   const handleClick = (item) => {
     setSelectedItem(item);
@@ -385,7 +408,7 @@ const OaklandGreensWebsite = () => {
         }
         
         .stagger-children.visible > *:nth-child(1) { transition-delay: 0.1s; }
-        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.2s; }
+        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.2s; } 
         .stagger-children.visible > *:nth-child(3) { transition-delay: 0.3s; }
         .stagger-children.visible > *:nth-child(4) { transition-delay: 0.4s; }
         .stagger-children.visible > *:nth-child(5) { transition-delay: 0.5s; }
@@ -396,60 +419,56 @@ const OaklandGreensWebsite = () => {
         }
       `}</style>
 
-      <nav className="absolute top-0 left-0 right-0 z-50 p-6">
+        <nav className="fixed top-0 left-0 right-0 z-50 p-6 bg-transparent">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <div className="text-white font-semibold text-xl">OAKLAND</div>
-          
-          <button 
-            onClick={toggleMenu}
-            className="text-white text-2xl font-light focus:outline-none z-60 relative"
-          >
-            <div className={`transform transition-all duration-300 ${isOpen ? 'rotate-45' : 'rotate-0'}`}>
-              <span className="block w-6 h-0.5 bg-white mb-1"></span>
-              <span className={`block w-6 h-0.5 bg-white transform transition-all duration-300 ${isOpen ? 'rotate-90 -translate-y-1.5' : 'rotate-0'}`}></span>
+          <button onClick={toggleMenu} className="text-white text-2xl font-light focus:outline-none relative z-60">
+            <div className="flex flex-col items-center justify-center space-y-1">
+              <span className={`block w-6 h-0.5 bg-white transition-transform ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
+              <span className={`block w-6 h-0.5 bg-white transition-transform ${isMenuOpen ? '-rotate-45 -translate-y-1' : ''}`}></span>
             </div>
           </button>
         </div>
       </nav>
 
-      <div className={`fixed inset-0 bg-black z-40 transition-all duration-500 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+      <div className={`fixed inset-0 z-40 bg-black bg-opacity-90 transition-opacity duration-500 ${isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}>
         <div className="flex items-center justify-center h-full">
           <div className="text-center space-y-12">
-            <a 
-              href="#" 
-              className="block text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-all duration-300 hover:scale-110"
-              onClick={toggleMenu}
-            >
-              Home
-            </a>
-            <a 
-              href="#" 
-              className="block text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-all duration-300 hover:scale-110"
-              onClick={toggleMenu}
-            >
-              Properties
-            </a>
-            <a 
-              href="#" 
-              className="block text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-all duration-300 hover:scale-110"
-              onClick={toggleMenu}
-            >
-              About
-            </a>
-            <a 
-              href="#" 
-              className="block text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-all duration-300 hover:scale-110"
-              onClick={toggleMenu}
-            >
-              Contact
-            </a>
-             <a 
-              href="#" 
-              className="block text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-all duration-300 hover:scale-110"
-              onClick={toggleMenu}
-            >
-              Downloads
-            </a>
+            {['Home', 'Properties', 'About', 'Contact'].map((label) => (
+              <a
+                key={label}
+                href="#"
+                onClick={toggleMenu}
+                className="block text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-transform duration-300 hover:scale-110"
+              >
+                {label}
+              </a>
+            ))}
+
+            <div className="relative download-dropdown inline-block">
+              <a
+                href="#"
+                onClick={toggleDownloadDropdown}
+                className="flex items-center justify-center gap-2 text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-transform duration-300 hover:scale-110"
+              >
+                Download
+                <ChevronDown className={`transition-transform duration-300 ${isDownloadDropdownOpen ? 'rotate-180' : ''}`} />
+              </a>
+              {isDownloadDropdownOpen && (
+                <div className="absolute left-1/2 transform -translate-x-1/2 mt-4 w-72 bg-white rounded-xl shadow-2xl z-50 text-left">
+                  <a
+                    href={Payment_Plan}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-6 py-3 text-base text-gray-800 hover:bg-gray-100 font-medium"
+                  >
+                    View Payment Plan
+                  </a>
+                  <a href="#" className="block px-6 py-3 text-base text-gray-800 hover:bg-gray-100 font-medium">Pricing Sheet</a>
+                  <a href="#" className="block px-6 py-3 text-base text-gray-800 hover:bg-gray-100 font-medium">Brochure</a>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -484,7 +503,7 @@ const OaklandGreensWebsite = () => {
               src={home}
               alt="Home"
               className="absolute top-1/2 left-1/2 transform homes -translate-x-1/2 -translate-y-1/2 inset-0 object-cover fade-in-out-image"
-              style={{ width: 802, marginTop: '122px' }}
+              style={{ width: 702, marginTop: '122px' }}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
           </div>
@@ -835,7 +854,19 @@ const OaklandGreensWebsite = () => {
         </div>
       </section>
 
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden"
+               <div style={{ width: '100%', height: '400px' }}>
+      <iframe
+        title="Google Map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13605.152524679992!2d74.34407434999999!3d31.5203704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391904dd3b0e72e3%3A0xdf94c8e6c462f79b!2sLahore%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1623933457156!5m2!1sen!2s"
+        width="100%"
+        height="100%"
+        style={{ border: 0 }}
+        allowFullScreen=""
+        loading="lazy"
+      ></iframe>
+    </div>
+
+      <section className="relative mt-4 min-h-screen flex items-center justify-center overflow-hidden"
         style={{
           backgroundImage: `url(${footer_back})`,
           backgroundSize: 'cover',
