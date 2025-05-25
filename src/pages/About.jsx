@@ -15,6 +15,8 @@ import about5 from '../assets/Gallery_5.jpg';
 import about6 from '../assets/Gallery_6.jpg';
 import about7 from '../assets/Gallery_7.jpg';
 import about8 from '../assets/Gallery_8.jpg';
+import logoWhite from '../assets/logo-white.png';
+import logoDark from '../assets/logo-dark.png';
 
 import './About.css'
 
@@ -28,6 +30,7 @@ const images = [
 const About = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDownloadDropdownOpen, setIsDownloadDropdownOpen] = useState(false);
+  const [isDarkLogo, setIsDarkLogo] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -55,12 +58,26 @@ const About = () => {
     return () => document.removeEventListener('click', handleOutsideClick);
   }, [isDownloadDropdownOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setIsDarkLogo(true);
+      } else {
+        setIsDarkLogo(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="bg-white">
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 p-6 bg-transparent">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <div className="text-white font-semibold text-xl">OAKLAND</div>
+          <div className="text-white font-semibold">
+            <img src={isDarkLogo ? logoDark : logoWhite} alt="OAKLAND" className="h-8 transition-all duration-300" />
+          </div>
           <button onClick={toggleMenu} className="text-white text-2xl font-light focus:outline-none relative z-60">
             <div className="flex flex-col items-center justify-center space-y-1">
               <span className={`block w-6 h-0.5 bg-white transition-transform ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
@@ -74,20 +91,20 @@ const About = () => {
       <div className={`fixed inset-0 z-40 bg-black bg-opacity-90 transition-opacity duration-500 ${isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}>
         <div className="flex items-center justify-center h-full">
           <div className="text-center space-y-12">
-            {[
-              { label: 'Home', path: '/' },
-              { label: 'Properties', path: '/properties' },
-              { label: 'About', path: '/about' },
-              { label: 'Contact', path: '/contact' },
-            ].map(({ label, path }) => (
-              <Link
+            {['Home', 'About', 'Contact', 'Careers'].map((label) => (
+              <a
                 key={label}
-                to={path}
+                href={
+                  label === 'Home' ? '/' :
+                  label === 'About' ? '/about' :
+                  label === 'Contact' ? '/contact' :
+                  label === 'Careers' ? '/careers' : '#'
+                }
                 onClick={toggleMenu}
                 className="block text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-transform duration-300 hover:scale-110"
               >
                 {label}
-              </Link>
+              </a>
             ))}
 
             <div className="relative download-dropdown inline-block">
@@ -147,7 +164,7 @@ const About = () => {
        Welcome to Oakland Greens -<br></br> where luxury meets tranquility.
       </h2>
 
-      <p className="text-lg font-medium mb-4">Serene Stays Amidst Murree’s Mountain Bliss</p>
+      <p className="text-lg font-medium mb-4">Serene Stays Amidst Murree's Mountain Bliss</p>
 
       <p className="text-gray-700 mb-4">
         <strong>Nestled amidst nature yet conveniently</strong><br />
@@ -172,7 +189,7 @@ const About = () => {
           <li>Trekking & Adventure Parks</li>
         </ul>
         <ul className="list-disc list-inside space-y-1">
-          <li>Kids’ Play Areas</li>
+          <li>Kids' Play Areas</li>
           <li>Banquet & Conference Facilities</li>
           <li>Indoor Games</li>
           <li>Eco-Friendly Design</li>
@@ -207,7 +224,7 @@ const About = () => {
     <p className="text-gray-700 text-lg leading-relaxed">
     Explore the lifestyle of Oakland Greens through our curated gallery.
 
-From stunning architecture to serene green spaces, our images reflect the essence of luxurious farmhouse living. Whether it’s the grandeur of our interiors, the beauty of natural surroundings, or the peaceful vibes at every corner — each photo captures the spirit of what makes Oakland Greens truly special.
+From stunning architecture to serene green spaces, our images reflect the essence of luxurious farmhouse living. Whether it's the grandeur of our interiors, the beauty of natural surroundings, or the peaceful vibes at every corner — each photo captures the spirit of what makes Oakland Greens truly special.
 
 Take a glimpse into your future home — designed to inspire, built to last.
     </p>
