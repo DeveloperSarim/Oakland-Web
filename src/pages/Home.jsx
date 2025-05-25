@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ChevronDown, ArrowRight , Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
-import home from '../assets/home.png';
+import home from '../assets/home_1.png';
 import nature from '../assets/Nature.png';
 import luxury from '../assets/luxury.png';
-import footer from '../assets/footer.png';
+import footer from '../assets/footer-1.png';
 import footer_back from '../assets/footer-back.jpg';
+import logoWhite from '../assets/logo-white.png';
+import logoDark from '../assets/logo-dark.png';
 import '../index.css';
 import { motion } from 'framer-motion';
 import Payment_Plan from '../assets/Payment-Plan.pdf';
 import Oakland_presentation from '../assets/Oakland - Presentation.pdf';
-import { Link } from 'react-router-dom';
-
 
 
 // PropertySlider Component
@@ -104,6 +104,10 @@ const PropertySlider = () => {
 
   return (
     <div className="relative overflow-hidden h-full" style={{height: '516px'}}>
+      {/* Left Fade */}
+      <div className="hidden md:block pointer-events-none absolute left-0 top-0 h-full w-40 z-20" style={{background: 'linear-gradient(to right, #fff 40%, transparent 100%)'}}></div>
+      {/* Right Fade */}
+      <div className="hidden md:block pointer-events-none absolute right-0 top-0 h-full w-40 z-20" style={{background: 'linear-gradient(to left, #fff 40%, transparent 100%)'}}></div>
       <div
         className="flex transition-transform duration-500 ease-in-out "
         style={{
@@ -149,14 +153,14 @@ const PropertySlider = () => {
 
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105 z-40"
         disabled={isTransitioning}
       >
         <ChevronLeft size={20} />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105 z-40"
         disabled={isTransitioning}
       >
         <ChevronRight size={20} />
@@ -175,13 +179,14 @@ const PropertySlider = () => {
   );
 };
 
-const Home = () => {
+const OaklandGreensWebsite = () => {
   const [expandedFaq, setExpandedFaq] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState('Prime Locations');
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDownloadDropdownOpen, setIsDownloadDropdownOpen] = useState(false);
+  const [isDarkLogo, setIsDarkLogo] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -209,6 +214,18 @@ const Home = () => {
     return () => document.removeEventListener('click', handleOutsideClick);
   }, [isDownloadDropdownOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setIsDarkLogo(true);
+      } else {
+        setIsDarkLogo(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   // const toggleMenu = () => {
   //   setIsOpen(!isOpen);
@@ -219,17 +236,7 @@ const Home = () => {
   };
 
   const handleButtonClick = () => {
-    try {
-      if (Payment_Plan) {
-        window.open(Payment_Plan, '_blank');
-      } else {
-        console.error('Payment_Plan is undefined');
-        alert('Failed to open the payment plan file. Please ensure the file is correctly placed in the assets folder.');
-      }
-    } catch (error) {
-      console.error('Error opening payment plan file:', error);
-      alert('An error occurred while opening the payment plan file.');
-    }
+    window.open('/Payment-Plan.pdf', '_blank');
   };
 
   const items = [
@@ -421,77 +428,87 @@ const Home = () => {
       `}</style>
 
         <nav className="fixed top-0 left-0 right-0 z-50 p-6 bg-transparent">
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <div className="text-white font-semibold text-xl">OAKLAND</div>
-          <button onClick={toggleMenu} className="text-white text-2xl font-light focus:outline-none relative z-60">
-            <div className="flex flex-col items-center justify-center space-y-1">
-              <span className={`block w-6 h-0.5 bg-white transition-transform ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
-              <span className={`block w-6 h-0.5 bg-white transition-transform ${isMenuOpen ? '-rotate-45 -translate-y-1' : ''}`}></span>
+          <div className="flex justify-between items-center max-w-7xl mx-auto">
+            <div className="text-white font-semibold">
+              <img src={isDarkLogo ? logoDark : logoWhite} alt="OAKLAND" className="h-8 transition-all duration-300" />
             </div>
-          </button>
-        </div>
-      </nav>
+            <button onClick={toggleMenu} className="text-white text-2xl font-light focus:outline-none relative z-60">
+              <div className="flex flex-col items-center justify-center space-y-1">
+                <span className={`block w-6 h-0.5 bg-white transition-transform ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
+                <span className={`block w-6 h-0.5 bg-white transition-transform ${isMenuOpen ? '-rotate-45 -translate-y-1' : ''}`}></span>
+              </div>
+            </button>
+          </div>
+        </nav>
 
       <div className={`fixed inset-0 z-40 bg-black bg-opacity-90 transition-opacity duration-500 ${isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}>
-  <div className="flex items-center justify-center h-full">
-    <div className="text-center space-y-12">
-      {[
-        { label: 'Home', path: '/' },
-        { label: 'Properties', path: '/properties' },
-        { label: 'About', path: '/about' },
-        { label: 'Contact', path: '/contact' },
-      ].map(({ label, path }) => (
-        <Link
-          key={label}
-          to={path}
-          onClick={toggleMenu}
-          className="block text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-transform duration-300 hover:scale-110"
-        >
-          {label}
-        </Link>
-      ))}
+        <div className="flex items-center justify-center h-full">
+          <div className="text-center space-y-12">
+            {['Home', 'About', 'Contact', 'Careers'].map((label) => (
+              <a
+                key={label}
+                href="#"
+                onClick={toggleMenu}
+                className="block text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-transform duration-300 hover:scale-110"
+              >
+                {label}
+              </a>
+            ))}
 
-      <div className="relative download-dropdown inline-block">
-        <button
-          onClick={toggleDownloadDropdown}
-          className="flex items-center justify-center gap-2 text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-transform duration-300 hover:scale-110"
-        >
-          Download
-          <ChevronDown className={`transition-transform duration-300 ${isDownloadDropdownOpen ? 'rotate-180' : ''}`} />
-        </button>
-
-        {isDownloadDropdownOpen && (
-          <div className="absolute left-1/2 transform -translate-x-1/2 mt-4 w-72 bg-white rounded-xl shadow-2xl z-50 text-left">
-            <a
-              href={Payment_Plan}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block px-6 py-3 text-base text-gray-800 hover:bg-gray-100 font-medium"
-            >
-              View Payment Plan
-            </a>
-            <a
-              href={Oakland_presentation}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block px-6 py-3 text-base text-gray-800 hover:bg-gray-100 font-medium"
-            >
-              Oakland Green Presentation
-            </a>
+            <div className="relative download-dropdown inline-block">
+              <a
+                href="#"
+                onClick={toggleDownloadDropdown}
+                className="flex items-center justify-center gap-2 text-white text-5xl md:text-6xl font-light hover:text-gray-300 transition-transform duration-300 hover:scale-110"
+              >
+                Download
+                <ChevronDown className={`transition-transform duration-300 ${isDownloadDropdownOpen ? 'rotate-180' : ''}`} />
+              </a>
+              {isDownloadDropdownOpen && (
+                <div className="absolute left-1/2 transform -translate-x-1/2 mt-4 w-72 bg-white rounded-xl shadow-2xl z-50 text-left">
+                  <a
+                    href={Payment_Plan}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-6 py-3 text-base text-gray-800 hover:bg-gray-100 font-medium"
+                  >
+                    View Payment Plan
+                  </a>
+                  <a
+                    href={Oakland_presentation}
+                    target="_blank"
+                    rel="noopener noreferr"
+                    className="block px-6 py-3 text-base text-gray-800 hover:bg-gray-100 font-medium"
+                  >
+                  Oakland Green Presentation
+                  </a>
+                  
+              
+                </div>
+              )}
+            </div>
           </div>
-        )}
+        </div>
       </div>
-    </div>
-  </div>
-</div>
 
+      <section className="relative h-screen bg-gradient-to-b from-blue-400 to-blue-100 pt-24 pb-10 opacity-110">
+        <div className="absolute inset-0 pt-4 z-0">
+          <div className="relative h-full flex justify-center items-center">
+            <img
+              src={home}
+              alt="Home"
+              className="absolute top-1/2 left-1/2 transform homes -translate-x-1/2 -translate-y-1/2 inset-0 object-cover fade-in-out-image"
+              style={{ width: 1200, marginTop: '100px' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
+          </div>
+        </div>
 
-      <section className="relative h-screen bg-gradient-to-b from-blue-400 to-blue-100 pt-24 pb-10 opacity-90">
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="text-center text-white z-20 mb-72 px-4"
+          className="text-center text-white z-20 mb-72 px-4 relative"
         >
           <h1 className="text-4xl md:text-6xl font-light mb-4 hero leading-tight">
             Farmhouse<br />
@@ -503,24 +520,12 @@ const Home = () => {
             amenities.
           </p>
           <button
-            className="bg-white text-black px-4 py-2 rounded-2xl text-md"
+            className="bg-white text-black px-4 py-2 rounded-2xl text-md relative z-50 hover:bg-gray-100 transition-colors duration-300"
             onClick={handleButtonClick}
           >
             Explore Payment Plan
           </button>
         </motion.div>
-
-        <div className="absolute inset-0 pt-4 z-10">
-          <div className="relative h-full flex justify-center items-center">
-            <img
-              src={home}
-              alt="Home"
-              className="absolute top-1/2 left-1/2 transform homes -translate-x-1/2 -translate-y-1/2 inset-0 object-cover fade-in-out-image"
-              style={{ width: 902, height:"500px", marginTop: '122px' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
-          </div>
-        </div>
       </section>
 
       <section className="py-20 bg-white">
@@ -584,9 +589,10 @@ const Home = () => {
                 placeholder="Your Email Address"
                 className="bg-transparent px-6 py-2 focus:outline-none w-64 text-sm placeholder-gray-500"
               />
-              <button className="bg-black text-white px-8 py-3 text-sm font-medium rounded-2xl hover:bg-gray-800 transition">
-                Stay Updated
-              </button>
+              <button class="bg-black text-white px-8 py-3 text-sm font-medium rounded-2xl hover:bg-gray-800 transition whitespace-nowrap">
+  Stay Updated
+</button>
+
             </div>
           </motion.div>
         </div>
@@ -594,7 +600,7 @@ const Home = () => {
 
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-center mb-8 relative w-54 h-50">
+          <div className="flex justify-center mb-8 relative w-54 h-50" style={{ marginBottom: '110px', marginTop: '-50px' }}>
             <img src={luxury} alt="" className="rounded-lg" />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white pointer-events-none" />
           </div>
@@ -868,12 +874,13 @@ const Home = () => {
       </section>
 
      <div style={{ width: '70%', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
+  
   <iframe
     title="Oakland Greens Location"
     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1083.2676050415534!2d72.8612299!3d33.7352444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfa36911f72c29%3A0xae2df9d725824c4!2sOakland%20Greens!5e0!3m2!1sen!2s!4v1716659534274!5m2!1sen!2s"
     width="100%"
     height="100%"
-    style={{ border: 0, borderRadius: '8px', padding:"3" }}
+    style={{ border: 0, borderRadius: '8px', padding:"3", marginTop:"20px" }}
     allowFullScreen=""
     loading="lazy"
     referrerPolicy="no-referrer-when-downgrade"
@@ -897,7 +904,8 @@ const Home = () => {
       <img
         src={footer}
         alt="House 1"
-        className="w-22 h-60 flex align-end object-cover rounded-lg opacity-80"
+        className="w-22 h-80 flex align-end object-cover rounded-lg opacity-80"
+        style={{ height: '500px' }}
       />
     </div>
   </div>
@@ -931,9 +939,14 @@ const Home = () => {
       we're here to bring your dream to life.
     </motion.p>
 
-    <button className="bg-white text-black px-8 py-2 rounded-2xl text-md">
-      Get Plan
-    </button>
+    <a
+      href={Oakland_presentation}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bg-white text-black px-8 py-2 rounded-2xl text-md inline-block hover:bg-gray-100 transition-colors duration-300"
+    >
+      View Presentation
+    </a>
   </motion.div>
 
   <footer className="absolute  bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
@@ -946,16 +959,16 @@ const Home = () => {
 
       {/* ✅ Social Icons */}
       <div className="flex icons space-x-4">
-        <a href="#" className="hover:text-gray-300 text-black transition">
+        <a href="https://www.facebook.com/oaklandgreenspk/" className="hover:text-gray-300 text-black transition" target='_blank'>
           <Facebook size={20} />
         </a>
-        <a href="#" className="hover:text-gray-300 text-black transition">
+        <a href="#" className="hover:text-gray-300 text-black transition" target='_blank'>
           <Instagram size={20} />
         </a>
-        <a href="#" className="hover:text-gray-300 text-black transition">
+        <a href="#" className="hover:text-gray-300 text-black transition" target='_blank'>
           <Twitter size={20} />
         </a>
-        <a href="#" className="hover:text-gray-300 text-black transition">
+        <a href="#" className="hover:text-gray-300 text-black transition" target='_blank'>
           <Linkedin size={20} />
         </a>
       </div>
@@ -970,4 +983,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default OaklandGreensWebsite;
