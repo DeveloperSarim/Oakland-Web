@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, ChevronDown, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronDown, ArrowRight , Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import home from './assets/home.png';
 import nature from './assets/Nature.png';
 import luxury from './assets/luxury.png';
@@ -8,6 +8,8 @@ import footer_back from './assets/footer-back.jpg';
 import './index.css';
 import { motion } from 'framer-motion';
 import Payment_Plan from './assets/Payment-Plan.pdf';
+import Oakland_presentation from './assets/Oakland - Presentation.pdf';
+
 
 // PropertySlider Component
 const PropertySlider = () => {
@@ -99,51 +101,48 @@ const PropertySlider = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden h-full" style={{height: '516px'}}>
       <div
         className="flex transition-transform duration-500 ease-in-out "
         style={{
-          transform: `translateX(-${(currentSlide * 100) / (window.innerWidth > 1024 ? 3 : 1)}%)`,
+          transform: `translateX(-${(currentSlide * 100) / (window.innerWidth > 1024 ? 4 : 1)}%)`,
           width: `${properties.length * (window.innerWidth > 1024 ? 33.33 : 100)}%`
         }}
       >
-        {properties.map((property, index) => (
-          <div
-            key={property.id}
-            className="flex-shrink-0 w-full lg:w-1/3 px-3"
-            style={{ width: window.innerWidth > 1024 ? '33.33%' : '100%' }}
-          >
-            <div className="relative group cursor-pointer h-80">
-              <div className={`h-full bg-gradient-to-br ${property.gradient} rounded-2xl overflow-hidden relative shadow-lg hover:shadow-xl transition-all duration-300`}>
-                <img
-                  src={property.image}
-                  alt={property.name}
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-300"
-                />
-                <div className={`absolute inset-0 bg-gradient-to-br ${property.gradient} opacity-60`}></div>
+       {properties.map((property, index) => (
+  <div
+    key={property.id}
+    className="flex-shrink-0 w-full lg:w-1/3 px-3"
+    style={{ width: window.innerWidth > 1024 ? '33.33%' : '100%' }}
+  >
+    <div className="relative group cursor-pointer h-80">
+      <div className={`h-full  bg-gradient-to-br ${property.gradient} rounded-2xl overflow-hidden relative shadow-lg hover:shadow-xl transition-all duration-300`}>
+        <img
+          src={property.image}
+          alt={property.name}
+          className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-300"
+        />
+        <div className={`absolute inset-0 bg-gradient-to-br ${property.gradient} opacity-60`}></div>
 
-                <div className="absolute bottom-6 left-6 text-white">
-                  <div className="text-2xl font-light mb-2">{property.price}</div>
-                  <h3 className="text-lg font-semibold mb-1">{property.name}</h3>
-                  <div className="flex space-x-3 text-sm opacity-90 mb-2">
-                    <span>{property.bedrooms} bed</span>
-                    <span>{property.bathrooms} bath</span>
-                  </div>
-                </div>
+        <button className="absolute top-4 right-4 w-10 h-10 bg-black/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+          <ArrowRight size={18} />
+        </button>
+      </div>
 
-                <button className="absolute top-4 right-4 w-10 h-10 bg-black/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
-                  <ArrowRight size={18} />
-                </button>
-              </div>
+      {/* 🔽 All text including price, name, etc. moved here */}
+      <div className="p-2 py-2 mt-4 transform transition-all duration-300">
+        <div className="text-2xl font-light text-black mb-1">{property.price}</div>
+        <h3 className="text-lg font-semibold text-black mb-1">{property.name}</h3>
+        <div className="flex space-x-3 text-sm text-gray-600 mb-2">
+          <span>{property.bedrooms} bed</span>
+          <span>{property.bathrooms} bath</span>
+        </div>
+        <p className="text-gray-600 text-sm">{property.description}</p>
+      </div>
+    </div>
+  </div>
+))}
 
-              {currentSlide === index && (
-                <div className="P-2 PY-2 mt-4 transform transition-all duration-300">
-                  <p className="text-gray-600 text-sm">{property.description}</p>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
       </div>
 
       <button
@@ -161,7 +160,7 @@ const PropertySlider = () => {
         <ChevronRight size={20} />
       </button>
 
-      <div className="flex justify-center mt-8 space-x-2">
+      <div className="flex justify-center mt-44 space-x-2">
         {properties.map((_, index) => (
           <button
             key={index}
@@ -464,8 +463,16 @@ const OaklandGreensWebsite = () => {
                   >
                     View Payment Plan
                   </a>
-                  <a href="#" className="block px-6 py-3 text-base text-gray-800 hover:bg-gray-100 font-medium">Pricing Sheet</a>
-                  <a href="#" className="block px-6 py-3 text-base text-gray-800 hover:bg-gray-100 font-medium">Brochure</a>
+                  <a
+                    href={Oakland_presentation}
+                    target="_blank"
+                    rel="noopener noreferr"
+                    className="block px-6 py-3 text-base text-gray-800 hover:bg-gray-100 font-medium"
+                  >
+                  Oakland Green Presentation
+                  </a>
+                  
+              
                 </div>
               )}
             </div>
@@ -854,83 +861,105 @@ const OaklandGreensWebsite = () => {
         </div>
       </section>
 
-               <div style={{ width: '100%', height: '400px' }}>
-      <iframe
-        title="Google Map"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13605.152524679992!2d74.34407434999999!3d31.5203704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391904dd3b0e72e3%3A0xdf94c8e6c462f79b!2sLahore%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1623933457156!5m2!1sen!2s"
-        width="100%"
-        height="100%"
-        style={{ border: 0 }}
-        allowFullScreen=""
-        loading="lazy"
-      ></iframe>
+     <div style={{ width: '70%', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
+  <iframe
+    title="Oakland Greens Location"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1083.2676050415534!2d72.8612299!3d33.7352444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfa36911f72c29%3A0xae2df9d725824c4!2sOakland%20Greens!5e0!3m2!1sen!2s!4v1716659534274!5m2!1sen!2s"
+    width="100%"
+    height="100%"
+    style={{ border: 0, borderRadius: '8px', padding:"3" }}
+    allowFullScreen=""
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>
+
+
+
+
+   <section
+  className="relative mt-4 min-h-screen flex items-center justify-center overflow-hidden"
+  style={{
+    backgroundImage: `url(${footer_back})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
+>
+  <div className="absolute inset-0 flex items-end justify-center ">
+    <div className="flex space-x-8">
+      <img
+        src={footer}
+        alt="House 1"
+        className="w-22 h-60 flex align-end object-cover rounded-lg opacity-80"
+      />
     </div>
+  </div>
 
-      <section className="relative mt-4 min-h-screen flex items-center justify-center overflow-hidden"
-        style={{
-          backgroundImage: `url(${footer_back})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
-        <div className="absolute inset-0 flex items-end justify-center ">
-          <div className="flex space-x-8">
-            <img 
-              src={footer} 
-              alt="House 1"
-              className="w-22 h-60 flex align-end object-cover rounded-lg opacity-80"
-            />
-          </div>
-        </div>
-        
-        <motion.div
-          className="relative z-10 text-center text-white px-4 footers"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <motion.h2
-            className="text-4xl md:text-6xl font-bold mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Your dream <br />
-            home awaits.
-          </motion.h2>
+  <motion.div
+    className="relative z-10 text-center text-white px-4 footers"
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+  >
+    <motion.h2
+      className="text-4xl md:text-6xl font-bold mb-6"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.1, duration: 0.6 }}
+      viewport={{ once: true }}
+    >
+      Your dream <br />
+      home awaits.
+    </motion.h2>
 
-          <motion.p
-            className="text-lg md:text-xl mb-8 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Whether you're exploring our homes or envisioning
-            something custom, we're here to bring your dream to life.
-          </motion.p>
+    <motion.p
+      className="text-lg md:text-xl mb-8 max-w-2xl mx-auto"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2, duration: 0.6 }}
+      viewport={{ once: true }}
+    >
+      Whether you're exploring our homes or envisioning something custom,
+      we're here to bring your dream to life.
+    </motion.p>
 
-        <button className="bg-white text-black px-8  py-2 rounded-2xl text-md">
+    <button className="bg-white text-black px-8 py-2 rounded-2xl text-md">
       Get Plan
     </button>
-        </motion.div>
-        
-        <footer className="absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
-          <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <div className="flex space-x-8 decoration-none">
-              <a href="#" className="hover:text-gray-300 transition decoration-none">Contact</a>
-              <a href="#" className="hover:text-gray-300 transition">Privacy Policy</a>
-              <a href="#" className="hover:text-gray-300 transition">Terms</a>
-            </div>
-            <div className="text-sm text-gray-400">
-              © 2025 Oakland Greens. All rights reserved.
-            </div>
-          </div>
-        </footer>
-      </section>
+  </motion.div>
+
+  <footer className="absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
+    <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+      <div className="flex space-x-8">
+        <a href="#" className="hover:text-gray-300  transition">Contact</a>
+        <a href="#" className="hover:text-gray-300 transition">Privacy Policy</a>
+        <a href="#" className="hover:text-gray-300 transition">Terms</a>
+      </div>
+
+      {/* ✅ Social Icons */}
+      <div className="flex space-x-4">
+        <a href="#" className="hover:text-gray-300 text-black transition">
+          <Facebook size={20} />
+        </a>
+        <a href="#" className="hover:text-gray-300 text-black transition">
+          <Instagram size={20} />
+        </a>
+        <a href="#" className="hover:text-gray-300 text-black transition">
+          <Twitter size={20} />
+        </a>
+        <a href="#" className="hover:text-gray-300 text-black transition">
+          <Linkedin size={20} />
+        </a>
+      </div>
+
+      <div className="text-sm text-white text-center md:text-right">
+        © 2025 Oakland Greens. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</section>
     </div>
   );
 };
