@@ -196,7 +196,7 @@ a {
   }
 
   .absolute.inset-0 {
-    bottom: 6rem; /* Slightly less offset */
+    bottom: -1rem; /* Slightly less offset */
   }
 
   .w-22 {
@@ -221,6 +221,94 @@ a {
   footer .text-sm {
     font-size: 0.7rem;
   }
+}
+
+@media (max-width: 375px){
+.text-5xl {
+    font-size: 1.5rem;
+  }
+
+  .homes{
+    margin-top: 100px;
+  }
+
+  .text-base {
+    font-size: 12px;
+    line-height: 1.2rem;
+}
+
+
+  .text-5xl.font-semibold {
+    font-size: 1.25rem;
+  }
+
+  .w-24.h-12 {
+    width: 3.5rem;
+    height: 2rem;
+  }
+
+  .text-gray-600.mb-12 {
+    font-size: 0.7rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .flex.items-center.bg-gray-100 {
+    max-width: 18rem;
+  }
+
+  .w-64 {
+    font-size: 0.7rem;
+    padding: 0.4rem;
+  }
+
+  .bg-black.text-white.px-8.py-3 {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  /* Footer Section */
+  .min-h-screen {
+    min-height: 75vh;
+
+  }
+
+  .insights{
+    display: flex;
+    flex-direction: column;
+  }
+
+ 
+  
+  .text-4xl {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  footer{
+    margin-top: 20px;
+  }
+
+  .text-lg {
+    font-size: 0.7rem;
+   
+  }
+  .footers {
+
+    margin-bottom: 221px;
+  
+}
+
+  .bg-white.text-black.px-6.py-3 {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  footer .text-sm {
+    font-size: 0.65rem;
+  }
+.luxury{
+      margin-top: 50px !important;
+
+}
 }
 
 @media (max-width: 320px) {
