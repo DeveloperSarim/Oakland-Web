@@ -217,17 +217,7 @@ const OaklandGreensWebsite = () => {
   };
 
   const handleButtonClick = () => {
-    try {
-      if (Payment_Plan) {
-        window.open(Payment_Plan, '_blank');
-      } else {
-        console.error('Payment_Plan is undefined');
-        alert('Failed to open the payment plan file. Please ensure the file is correctly placed in the assets folder.');
-      }
-    } catch (error) {
-      console.error('Error opening payment plan file:', error);
-      alert('An error occurred while opening the payment plan file.');
-    }
+    window.open('/Payment-Plan.pdf', '_blank');
   };
 
   const items = [
@@ -481,11 +471,23 @@ const OaklandGreensWebsite = () => {
       </div>
 
       <section className="relative h-screen bg-gradient-to-b from-blue-400 to-blue-100 pt-24 pb-10 opacity-90">
+        <div className="absolute inset-0 pt-4 z-0">
+          <div className="relative h-full flex justify-center items-center">
+            <img
+              src={home}
+              alt="Home"
+              className="absolute top-1/2 left-1/2 transform homes -translate-x-1/2 -translate-y-1/2 inset-0 object-cover fade-in-out-image"
+              style={{ width: 1200, marginTop: '100px' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
+          </div>
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="text-center text-white z-20 mb-72 px-4"
+          className="text-center text-white z-20 mb-72 px-4 relative"
         >
           <h1 className="text-4xl md:text-6xl font-light mb-4 hero leading-tight">
             Farmhouse<br />
@@ -497,24 +499,12 @@ const OaklandGreensWebsite = () => {
             amenities.
           </p>
           <button
-            className="bg-white text-black px-4 py-2 rounded-2xl text-md"
+            className="bg-white text-black px-4 py-2 rounded-2xl text-md relative z-50 hover:bg-gray-100 transition-colors duration-300"
             onClick={handleButtonClick}
           >
             Explore Payment Plan
           </button>
         </motion.div>
-
-        <div className="absolute inset-0 pt-4 z-10">
-          <div className="relative h-full flex justify-center items-center">
-            <img
-              src={home}
-              alt="Home"
-              className="absolute top-1/2 left-1/2 transform homes -translate-x-1/2 -translate-y-1/2 inset-0 object-cover fade-in-out-image"
-              style={{ width: 702, marginTop: '122px' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
-          </div>
-        </div>
       </section>
 
       <section className="py-20 bg-white">
