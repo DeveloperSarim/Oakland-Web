@@ -104,6 +104,10 @@ const PropertySlider = () => {
 
   return (
     <div className="relative overflow-hidden h-full" style={{height: '516px'}}>
+      {/* Left Fade */}
+      <div className="hidden md:block pointer-events-none absolute left-0 top-0 h-full w-40 z-20" style={{background: 'linear-gradient(to right, #fff 40%, transparent 100%)'}}></div>
+      {/* Right Fade */}
+      <div className="hidden md:block pointer-events-none absolute right-0 top-0 h-full w-40 z-20" style={{background: 'linear-gradient(to left, #fff 40%, transparent 100%)'}}></div>
       <div
         className="flex transition-transform duration-500 ease-in-out "
         style={{
@@ -149,14 +153,14 @@ const PropertySlider = () => {
 
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105 z-40"
         disabled={isTransitioning}
       >
         <ChevronLeft size={20} />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105 z-40"
         disabled={isTransitioning}
       >
         <ChevronRight size={20} />
@@ -440,7 +444,7 @@ const OaklandGreensWebsite = () => {
       <div className={`fixed inset-0 z-40 bg-black bg-opacity-90 transition-opacity duration-500 ${isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}>
         <div className="flex items-center justify-center h-full">
           <div className="text-center space-y-12">
-            {['Home', 'Properties', 'About', 'Contact'].map((label) => (
+            {['Home', 'About', 'Contact', 'Careers'].map((label) => (
               <a
                 key={label}
                 href="#"
@@ -935,9 +939,14 @@ const OaklandGreensWebsite = () => {
       we're here to bring your dream to life.
     </motion.p>
 
-    <button className="bg-white text-black px-8 py-2 rounded-2xl text-md">
-      Get Plan
-    </button>
+    <a
+      href={Oakland_presentation}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bg-white text-black px-8 py-2 rounded-2xl text-md inline-block hover:bg-gray-100 transition-colors duration-300"
+    >
+      View Presentation
+    </a>
   </motion.div>
 
   <footer className="absolute  bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
