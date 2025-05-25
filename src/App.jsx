@@ -930,16 +930,16 @@ const OaklandGreensWebsite = () => {
     </button>
   </motion.div>
 
-  <footer className="absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
-    <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-      <div className="flex space-x-8">
+  <footer className="absolute  bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
+    <div className="max-w-7xl  mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+      <div className="flex foot space-x-8">
         <a href="#" className="hover:text-gray-300  transition">Contact</a>
         <a href="#" className="hover:text-gray-300 transition">Privacy Policy</a>
         <a href="#" className="hover:text-gray-300 transition">Terms</a>
       </div>
 
       {/* ✅ Social Icons */}
-      <div className="flex space-x-4">
+      <div className="flex icons space-x-4">
         <a href="#" className="hover:text-gray-300 text-black transition">
           <Facebook size={20} />
         </a>
