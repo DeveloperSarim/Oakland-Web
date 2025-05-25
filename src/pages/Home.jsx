@@ -447,7 +447,7 @@ const OaklandGreensWebsite = () => {
             {['Home', 'About', 'Contact', 'Careers'].map((label) => (
               <a
                 key={label}
-                href={
+                href={  
                   label === 'Home' ? '/' :
                   label === 'About' ? '/about' :
                   label === 'Contact' ? '/contact' :

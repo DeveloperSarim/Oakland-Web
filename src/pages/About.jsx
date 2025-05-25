@@ -7,6 +7,23 @@ import footer_back from '../assets/footer-back.jpg';
 import aboutHero from '../assets/about-bg.JPG'; // ✅ replace with your actual image
 import Payment_Plan from '../assets/Payment-Plan.pdf';
 import Oakland_presentation from '../assets/Oakland - Presentation.pdf';
+import about1 from '../assets/Gallery_1.jpg';
+import about2 from '../assets/Gallery_2.jpg';
+import about3 from '../assets/Gallery_3.jpg';
+import about4 from '../assets/Gallery_4.jpg';
+import about5 from '../assets/Gallery_5.jpg';
+import about6 from '../assets/Gallery_6.jpg';
+import about7 from '../assets/Gallery_7.jpg';
+import about8 from '../assets/Gallery_8.jpg';
+
+import './About.css'
+
+const images = [
+  about1, about2, about3, about4, about5,
+  about6, about7, about8
+];
+
+
 
 const About = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -120,37 +137,30 @@ const About = () => {
           <h1 className="text-black text-5xl md:text-6xl font-light drop-shadow-lg">About Us</h1>
         </div>
       </section>
+
+      {/*  */}
       <section className="py-20 bg-white">
   <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
     {/* Left content */}
     <div>
       <h2 className="text-4xl font-light mb-6 leading-tight">
-        Serene Stays Amidst<br />
-        Murree’s Mountain Bliss
+       Welcome to Oakland Greens -<br></br> where luxury meets tranquility.
       </h2>
 
       <p className="text-lg font-medium mb-4">Serene Stays Amidst Murree’s Mountain Bliss</p>
 
       <p className="text-gray-700 mb-4">
-        <strong>Radisson Blu – A Global Icon of Luxury</strong><br />
-        Synonymous with excellence, Radisson Blu is a globally acclaimed hospitality brand,
-        offering sophisticated accommodations, impeccable service, and an unrivaled luxury
-        experience in the world’s most breathtaking destinations.
+        <strong>Nestled amidst nature yet conveniently</strong><br />
+       accessible from the city, Oakland Greens redefines farmhouse living with elegance, privacy, and modern comfort. Our vision is to create a peaceful sanctuary where families can unwind, reconnect, and experience the finest in eco-luxury lifestyle.
       </p>
 
       <p className="text-gray-700 mb-4">
-        <strong>Radisson Blu Murree Resort – Where Elegance Meets Nature</strong><br />
-        Nestled in the heart of Murree’s scenic landscapes, Radisson Blu Murree Resort is a
-        haven of tranquility and indulgence. With contemporary architecture seamlessly blending
-        with natural beauty, this resort offers a unique fusion of comfort, adventure, and
-        investment potential.
+        <strong>Every farmhouse at Oakland Greens is a testament to</strong><br />
+        craftsmanship and natural harmony. Designed with spacious layouts, lush landscapes, and high-end amenities, our properties offer a resort-like experience all year round.
       </p>
 
       <p className="text-gray-700 mb-6">
-        Spanning 250 kanal in the enchanting Patriata region, these exclusive resorts redefine
-        luxury living and vacationing. Designed for travelers, families, and investors, the
-        project boasts world-class facilities, mesmerizing views, and unparalleled returns on
-        investment.
+    Whether you're looking for a private weekend escape, a secure investment, or a legacy home — Oakland Greens delivers unmatched serenity, style, and value.
       </p>
 
       {/* Amenities list */}
@@ -172,8 +182,7 @@ const About = () => {
       </div>
 
       <p className="text-gray-600 mt-6 italic">
-        Escape to a world of unmatched luxury, breathtaking serenity, and premium hospitality.
-        Radisson Blu Murree – Where Every Stay is an Experience!
+       Join us in building a life where nature surrounds you and luxury follows.
       </p>
     </div>
 
@@ -187,7 +196,39 @@ const About = () => {
     </div>
   </div>
 </section>
+{/*  */}
 
+ 
+
+      {/* ✅ Masonry Layout */}
+      <div className="bg-white py-20 px-4 md:px-10">
+  <div className="text-center max-w-3xl mx-auto mb-12">
+    <h2 className="text-5xl font-light mb-6">Gallery</h2>
+    <p className="text-gray-700 text-lg leading-relaxed">
+    Explore the lifestyle of Oakland Greens through our curated gallery.
+
+From stunning architecture to serene green spaces, our images reflect the essence of luxurious farmhouse living. Whether it’s the grandeur of our interiors, the beauty of natural surroundings, or the peaceful vibes at every corner — each photo captures the spirit of what makes Oakland Greens truly special.
+
+Take a glimpse into your future home — designed to inspire, built to last.
+    </p>
+  </div>
+
+  {/* ✅ Responsive Grid */}
+ <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-2 gap-y-2 justify-items-center">
+  <img src={about1} alt="img1" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '350px' }} />
+  <img src={about2} alt="img2" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '310px' }} />
+  <img src={about3} alt="img3" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '330px' }} />
+  <img src={about4} alt="img4" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '280px' }} />
+  <img src={about5} alt="img5" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '300px' }} />
+  <img src={about6} alt="img6" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '300px' }} />
+  <img src={about7} alt="img7" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '300px' }} />
+  <img src={about8} alt="img8" className="rounded-xl object-cover" style={{ width: '100%', maxWidth: '250px', height: '300px' }} />
+</div>
+
+</div>
+
+
+    
 
       {/* Footer */}
       <section
