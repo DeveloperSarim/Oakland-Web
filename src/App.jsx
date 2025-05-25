@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ChevronDown, ArrowRight , Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
-import home from './assets/home.png';
+import home from './assets/home_1.png';
 import nature from './assets/Nature.png';
 import luxury from './assets/luxury.png';
-import footer from './assets/footer.png';
+import footer from './assets/footer-1.png';
 import footer_back from './assets/footer-back.jpg';
+import logoWhite from './assets/logo-white.png';
+import logoDark from './assets/logo-dark.png';
 import './index.css';
 import { motion } from 'framer-motion';
 import Payment_Plan from './assets/Payment-Plan.pdf';
@@ -180,6 +182,7 @@ const OaklandGreensWebsite = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDownloadDropdownOpen, setIsDownloadDropdownOpen] = useState(false);
+  const [isDarkLogo, setIsDarkLogo] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -206,6 +209,18 @@ const OaklandGreensWebsite = () => {
 
     return () => document.removeEventListener('click', handleOutsideClick);
   }, [isDownloadDropdownOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setIsDarkLogo(true);
+      } else {
+        setIsDarkLogo(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
 
   // const toggleMenu = () => {
@@ -409,16 +424,18 @@ const OaklandGreensWebsite = () => {
       `}</style>
 
         <nav className="fixed top-0 left-0 right-0 z-50 p-6 bg-transparent">
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <div className="text-white font-semibold text-xl">OAKLAND</div>
-          <button onClick={toggleMenu} className="text-white text-2xl font-light focus:outline-none relative z-60">
-            <div className="flex flex-col items-center justify-center space-y-1">
-              <span className={`block w-6 h-0.5 bg-white transition-transform ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
-              <span className={`block w-6 h-0.5 bg-white transition-transform ${isMenuOpen ? '-rotate-45 -translate-y-1' : ''}`}></span>
+          <div className="flex justify-between items-center max-w-7xl mx-auto">
+            <div className="text-white font-semibold">
+              <img src={isDarkLogo ? logoDark : logoWhite} alt="OAKLAND" className="h-8 transition-all duration-300" />
             </div>
-          </button>
-        </div>
-      </nav>
+            <button onClick={toggleMenu} className="text-white text-2xl font-light focus:outline-none relative z-60">
+              <div className="flex flex-col items-center justify-center space-y-1">
+                <span className={`block w-6 h-0.5 bg-white transition-transform ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
+                <span className={`block w-6 h-0.5 bg-white transition-transform ${isMenuOpen ? '-rotate-45 -translate-y-1' : ''}`}></span>
+              </div>
+            </button>
+          </div>
+        </nav>
 
       <div className={`fixed inset-0 z-40 bg-black bg-opacity-90 transition-opacity duration-500 ${isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}>
         <div className="flex items-center justify-center h-full">
@@ -470,7 +487,7 @@ const OaklandGreensWebsite = () => {
         </div>
       </div>
 
-      <section className="relative h-screen bg-gradient-to-b from-blue-400 to-blue-100 pt-24 pb-10 opacity-90">
+      <section className="relative h-screen bg-gradient-to-b from-blue-400 to-blue-100 pt-24 pb-10 opacity-110">
         <div className="absolute inset-0 pt-4 z-0">
           <div className="relative h-full flex justify-center items-center">
             <img
@@ -568,9 +585,10 @@ const OaklandGreensWebsite = () => {
                 placeholder="Your Email Address"
                 className="bg-transparent px-6 py-2 focus:outline-none w-64 text-sm placeholder-gray-500"
               />
-              <button className="bg-black text-white px-8 py-3 text-sm font-medium rounded-2xl hover:bg-gray-800 transition">
-                Stay Updated
-              </button>
+              <button class="bg-black text-white px-8 py-3 text-sm font-medium rounded-2xl hover:bg-gray-800 transition whitespace-nowrap">
+  Stay Updated
+</button>
+
             </div>
           </motion.div>
         </div>
@@ -578,7 +596,7 @@ const OaklandGreensWebsite = () => {
 
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-center mb-8 relative w-54 h-50">
+          <div className="flex justify-center mb-8 relative w-54 h-50" style={{ marginBottom: '110px', marginTop: '-50px' }}>
             <img src={luxury} alt="" className="rounded-lg" />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white pointer-events-none" />
           </div>
@@ -852,12 +870,13 @@ const OaklandGreensWebsite = () => {
       </section>
 
      <div style={{ width: '70%', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
+  
   <iframe
     title="Oakland Greens Location"
     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1083.2676050415534!2d72.8612299!3d33.7352444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfa36911f72c29%3A0xae2df9d725824c4!2sOakland%20Greens!5e0!3m2!1sen!2s!4v1716659534274!5m2!1sen!2s"
     width="100%"
     height="100%"
-    style={{ border: 0, borderRadius: '8px', padding:"3" }}
+    style={{ border: 0, borderRadius: '8px', padding:"3", marginTop:"20px" }}
     allowFullScreen=""
     loading="lazy"
     referrerPolicy="no-referrer-when-downgrade"
@@ -881,7 +900,8 @@ const OaklandGreensWebsite = () => {
       <img
         src={footer}
         alt="House 1"
-        className="w-22 h-60 flex align-end object-cover rounded-lg opacity-80"
+        className="w-22 h-80 flex align-end object-cover rounded-lg opacity-80"
+        style={{ height: '500px' }}
       />
     </div>
   </div>
@@ -930,16 +950,16 @@ const OaklandGreensWebsite = () => {
 
       {/* ✅ Social Icons */}
       <div className="flex icons space-x-4">
-        <a href="#" className="hover:text-gray-300 text-black transition">
+        <a href="https://www.facebook.com/oaklandgreenspk/" className="hover:text-gray-300 text-black transition" target='_blank'>
           <Facebook size={20} />
         </a>
-        <a href="#" className="hover:text-gray-300 text-black transition">
+        <a href="#" className="hover:text-gray-300 text-black transition" target='_blank'>
           <Instagram size={20} />
         </a>
-        <a href="#" className="hover:text-gray-300 text-black transition">
+        <a href="#" className="hover:text-gray-300 text-black transition" target='_blank'>
           <Twitter size={20} />
         </a>
-        <a href="#" className="hover:text-gray-300 text-black transition">
+        <a href="#" className="hover:text-gray-300 text-black transition" target='_blank'>
           <Linkedin size={20} />
         </a>
       </div>
