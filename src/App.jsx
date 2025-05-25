@@ -510,7 +510,7 @@ const OaklandGreensWebsite = () => {
               src={home}
               alt="Home"
               className="absolute top-1/2 left-1/2 transform homes -translate-x-1/2 -translate-y-1/2 inset-0 object-cover fade-in-out-image"
-              style={{ width: 702, marginTop: '122px' }}
+              style={{ width: 902, height:"500px", marginTop: '122px' }}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
           </div>
