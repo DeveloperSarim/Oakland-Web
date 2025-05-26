@@ -527,17 +527,30 @@ const OaklandGreensWebsite = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="text-center text-white z-20 mb-72 px-4 relative"
         >
-          <h1 className="text-4xl md:text-6xl font-light mb-4 hero leading-tight">
-            Farmhouse<br />
-            Living Like Never Before
-          </h1>
-          <p className="text-base md:text-lg max-w-md mx-auto opacity-90 mb-2">
-            Discover luxury living designed for the ultimate<br />
-            living experience with swimming pools and modern<br />
-            amenities.
+          <h1
+  className="text-4xl md:text-6xl font-medium mb-4 hero leading-tight"
+  style={{
+    fontWeight: '550',
+    fontSize: window.innerWidth <= 390 && window.innerHeight <= 844 ? '2rem' : '4rem',
+    marginTop: '20px',
+  }}
+>
+  Farmhouse Living<br />
+  <span
+    style={{
+      fontSize: window.innerWidth <= 390 && window.innerHeight <= 844 ? '2rem' : '3.8rem',
+    }}
+  >
+    Like Never Before
+  </span>
+</h1>
+
+          <p className="text-base md:text-lg max-w-md mx-auto opacity-90 mb-2" style={{maxWidth: '510px'}}>
+            Discover luxury living designed for the ultimate
+            living experience with swimming pools and modern amenities.
           </p>
           <button
-            className="bg-white text-black px-4 py-2 rounded-2xl text-md relative z-50 hover:bg-gray-100 transition-colors duration-300"
+            className="bg-white text-black px-4 py-2 rounded-2xl text-md relative z-50 hover:bg-gray-100 transition-colors duration-300 mt-6"
             onClick={handleButtonClick}
           >
             Explore Payment Plan
@@ -552,7 +565,7 @@ const OaklandGreensWebsite = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-5xl font-semibold mb-8 mt-20"
+            className="text-5xl font-semibold mb-2 mt-20"
           >
             It's Luxury Living
           </motion.h2>
@@ -573,10 +586,18 @@ const OaklandGreensWebsite = () => {
               className="mx-4 w-24 h-12 rounded-full overflow-hidden luxury flex items-center justify-center shadow-md border"
             >
               <img
-                src={nature}
-                alt="Nature"
-                className="w-full h-full object-cover"
-              />
+  src={nature}  // Replace with the actual image source
+  alt="Nature"
+  className="w-full h-full object-cover"
+  style={{
+    clipPath: 'polygon(0% 5%, 10% 0%, 90% 0%, 100% 5%, 100% 95%, 90% 100%, 10% 100%, 0% 95%)', // Leaf-like shape with rounded corners and slight extension
+    objectFit: 'cover',
+  }}
+/>
+
+
+
+
             </motion.div>
             <span className="text-5xl font-semibold">Nature.</span>
           </motion.div>
