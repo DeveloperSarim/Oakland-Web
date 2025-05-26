@@ -517,7 +517,7 @@ const OaklandGreensWebsite = () => {
                     ? '0px'
                     : '100px',
               }}            />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
+            <div className="absolute mt-20 inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
           </div>
         </div>
 
@@ -552,7 +552,7 @@ const OaklandGreensWebsite = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-5xl font-semibold mb-4"
+            className="text-5xl font-semibold mb-8 mt-20"
           >
             It's Luxury Living
           </motion.h2>

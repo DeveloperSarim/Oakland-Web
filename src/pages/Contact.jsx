@@ -74,30 +74,18 @@ const Contact = () => {
       </div>
 
       {/* Hero Section */}
-      <section
-        className="relative w-full h-[100%] md:h-[100%] bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundImage: `url(${aboutHero})` }}
-      >
-        <div className="absolute inset-0 bg-black/30" />
-        <div className="relative z-10 text-center px-4">
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-white text-4xl md:text-6xl font-light drop-shadow-lg mb-4"
-          >
-            Contact Us
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-white text-lg md:text-2xl max-w-2xl mx-auto drop-shadow mb-6"
-          >
-            We would love to hear from you! Whether you have a question about our farmhouses, want to schedule a visit, or just want to say hello—our team is ready to answer all your questions.
-          </motion.p>
-        </div>
-      </section>
+       <section
+          className="relative w-full h-screen bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${aboutHero})`
+          }}
+        >
+          {/* Optional overlay */}
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute bottom-10 left-10 z-10">
+            <h1 className="text-black text-5xl md:text-6xl font-light drop-shadow-lg">Contact Us</h1>
+          </div>
+        </section>
 
       {/* Contact Section */}
       <section className="flex-1 py-20 bg-white">
@@ -145,7 +133,7 @@ const Contact = () => {
               <div className="bg-white rounded-2xl shadow p-6">
                 <h2 className="text-xl font-semibold mb-2">Contact Details</h2>
                 <p className="text-gray-700 mb-1">Oakland Greens, Islamabad</p>
-                <p className="text-gray-700 mb-1">Phone: <a href="tel:+923001234567" className="text-blue-600 hover:underline">+92 300 1234567</a></p>
+                <p className="text-gray-700 mb-1">Phone: <a  href="tel:+923001234567" className="text-white hover:underline">+92 300 1234567</a></p>
                 <p className="text-gray-700 mb-1">Email: <a href="mailto:info@oaklandgreens.com" className="text-blue-600 hover:underline">info@oaklandgreens.com</a></p>
                 <div className="flex space-x-4 mt-4">
                   <a href="https://www.facebook.com/oaklandgreenspk/" className="hover:text-gray-400 text-black transition" target='_blank' rel="noopener noreferrer"><Facebook size={20} /></a>
@@ -171,80 +159,185 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <section
-        className="relative mt-4 min-h-[450px] flex items-center justify-center overflow-hidden"
-        style={{
-          backgroundImage: `url(${footer_back})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        <div className="absolute inset-0 flex items-end justify-center ">
-          <div className="flex space-x-8">
-            <img
-              src={footer}
-              alt="House 1"
-              className="w-22 h-60 md:h-80 flex align-end object-cover rounded-lg opacity-80"
-            />
-          </div>
-        </div>
-
-        <motion.div
-          className="relative z-10 text-center text-white px-4 footers"
+      <section className="flex-1 py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <motion.h2
           initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          className="text-4xl font-bold mb-4"
         >
-          <motion.h2
-            className="text-3xl md:text-5xl font-bold mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-            viewport={{ once: true }}
+          If You have Question Please Contact Us
+        </motion.h2>
+
+        {/* Subtext */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-gray-600 mb-8"
+        >
+          Fill in this Form or Send us Email with Your Inquiry
+        </motion.p>
+
+        {/* Grid Layout */}
+        <div className="grid md:grid-cols-1  flex  gap-12" style={{display:'flex'}}>
+          {/* Contact Form */}
+          <motion.form
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            // className="border border-gray-200 rounded-lg p-6 flex flex-col space-y-4"
+            onSubmit={(e) => {
+              e.preventDefault();
+              alert('Message Sent!');
+            }}
           >
-            Ready to connect?<br />We'd love to hear from you.
-          </motion.h2>
-          <motion.p
-            className="text-lg md:text-xl mb-8 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Our team is here to answer all your queries. Use the contact form or details above.
-          </motion.p>
-        </motion.div>
-        <footer className="absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-            <div className="flex space-x-8">
-              <a href="/contact" className="hover:text-gray-300 transition">Contact</a>
-              <a href="/about" className="hover:text-gray-300 transition">About</a>
-              <a href="#" className="hover:text-gray-300 transition">Privacy Policy</a>
-              <a href="#" className="hover:text-gray-300 transition">Terms</a>
-            </div>
+          <div className="flex space-x-4">
+              <input
+                type="text"
+                placeholder="Name"
+                className="p-3  border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm flex-1"
+              />
             <div className="flex space-x-4">
-              <a href="https://www.facebook.com/oaklandgreenspk/" className="hover:text-gray-300 text-black transition" target='_blank' rel="noopener noreferrer">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="hover:text-gray-300 text-black transition" target='_blank' rel="noopener noreferrer">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="hover:text-gray-300 text-black transition" target='_blank' rel="noopener noreferrer">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="hover:text-gray-300 text-black transition" target='_blank' rel="noopener noreferrer">
-                <Linkedin size={20} />
-              </a>
+              <input
+                type="text"
+                placeholder="Phone"
+                className="p-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm flex-1"
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                className="p-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm flex-1"
+                required
+              />
+              </div>
             </div>
-            <div className="text-sm text-white text-center md:text-right">
-              © 2025 Oakland Greens. All rights reserved.
+            <textarea
+              placeholder="Message"
+              rows={5}
+              className="p-3 border mt-4 border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm resize-none w-full"
+              required
+            ></textarea>
+            <button
+              type="submit"
+              className="bg-yellow-500 text-white text-lg py-2 px-14 rounded-lg font-medium hover:bg-yellow-600 transition w-fit"
+            >
+              Send
+            </button>
+          </motion.form>
+
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col space-y-8"
+          >
+            <div className="bg-blue-900 px-8 text-white rounded-lg p-6 " style={{width:'400px'}}>
+              <h2 className="text-xl font-semibold mb-4">Contact Details</h2>
+              <p className="mb-2 flex items-center">
+             
+                Oakland Greens, Islamabad
+              </p>
+              <p className="mb-2 flex items-center">
+               Phone: <a href="tel:+923001234567" className="text-white py-2 hover:underline">+92 300 1234567</a>
+              </p>
+              <p className="flex items-center">
+                
+            Email :  <a href=" mailto: info@oaklandgreens.com" className="text-wite py-2 hover:underline"> info@oaklandgreens.com</a>
+              </p>
             </div>
-          </div>
-        </footer>
-      </section>
+          </motion.div>
+        </div>
+        </div>
+      
+    </section>
+
+      {/* Footer */}
+        <section
+              className="relative mt-4 min-h-screen flex items-center justify-center overflow-hidden"
+              style={{
+                backgroundImage: `url(${footer_back})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+              }}
+            >
+              <div className="absolute inset-0 flex items-end justify-center">
+                <div className="flex space-x-8">
+                  <img
+                    src={footer}
+                    alt="House"
+                    className="w-22 h-60 flex align-end object-cover rounded-lg opacity-80"
+                  />
+                </div>
+              </div>
+      
+              <motion.div
+                className="relative z-10 text-center text-white px-4"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <motion.h2
+                  className="text-4xl md:text-6xl font-bold mb-6"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1, duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  Your dream <br />
+                  home awaits.
+                </motion.h2>
+      
+                <motion.p
+                  className="text-lg md:text-xl mb-8 max-w-2xl mx-auto"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  Whether you're exploring our homes or envisioning something custom,
+                  we're here to bring your dream to life.
+                </motion.p>
+      
+                <button className="bg-white text-black px-8 py-2 rounded-2xl text-md">
+                  Get Plan
+                </button>
+              </motion.div>
+      
+              <footer className="absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
+                <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+                  <div className="flex space-x-8">
+                    <a href="#" className="hover:text-gray-300 transition">Contact</a>
+                    <a href="#" className="hover:text-gray-300 transition">Privacy Policy</a>
+                    <a href="#" className="hover:text-gray-300 transition">Terms</a>
+                  </div>
+      
+                  <div className="flex space-x-4">
+                    <a href="#" className="hover:text-gray-300 transition">
+                      <Facebook size={20} />
+                    </a>
+                    <a href="#" className="hover:text-gray-300 transition">
+                      <Instagram size={20} />
+                    </a>
+                    <a href="#" className="hover:text-gray-300 transition">
+                      <Twitter size={20} />
+                    </a>
+                    <a href="#" className="hover:text-gray-300 transition">
+                      <Linkedin size={20} />
+                    </a>
+                  </div>
+      
+                  <div className="text-sm text-white text-center md:text-right">
+                    © 2025 Oakland Greens. All rights reserved.
+                  </div>
+                </div>
+              </footer>
+            </section>  
     </div>
   );
 };
