@@ -504,8 +504,19 @@ const OaklandGreensWebsite = () => {
               src={home}
               alt="Home"
               className="absolute top-1/2 left-1/2 transform homes -translate-x-1/2 -translate-y-1/2 inset-0 object-cover fade-in-out-image"
-              style={{ width: 1200, marginTop: '100px' }}
-            />
+              style={{
+                width:
+                  window.innerWidth >= 900 && window.innerWidth <= 1100 && window.innerHeight >= 500 && window.innerHeight <= 700
+                    ? '800px'
+                    : '1200px',
+                maxWidth: '100%',
+                marginTop:
+                  window.innerWidth >= 900 && window.innerWidth <= 1100 && window.innerHeight >= 500 && window.innerHeight <= 700
+                    ? '14px'
+                    : window.innerWidth >= 1200 && window.innerWidth <= 1400 && window.innerHeight >= 700 && window.innerHeight <= 900
+                    ? '0px'
+                    : '100px',
+              }}            />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-85" />
           </div>
         </div>
