@@ -105,17 +105,16 @@ const PropertySlider = () => {
   return (
     <div className="relative overflow-hidden h-full" style={{height: '516px'}}>
       {/* Left Fade */}
-      <div className="hidden md:block pointer-events-none absolute left-0 top-0 h-full w-20 z-20" style={{background: 'linear-gradient(to right, #fff 10%, transparent 80%)'}}></div>
+      <div className="hidden md:block pointer-events-none absolute left-0 top-0 h-full w-40 z-20" style={{background: 'linear-gradient(to right, #fff 40%, transparent 100%)'}}></div>
       {/* Right Fade */}
-      <div className="hidden md:block pointer-events-none absolute right-0 top-0 h-full w-20 z-20" style={{background: 'linear-gradient(to left, #fff 10%, transparent 80%)'}}></div>
+      <div className="hidden md:block pointer-events-none absolute right-0 top-0 h-full w-40 z-20" style={{background: 'linear-gradient(to left, #fff 40%, transparent 100%)'}}></div>
       <div
-  className="flex transition-transform duration-500 ease-in-out"
-  style={{
-    transform: `translateX(-${(currentSlide * 100) / (window.innerWidth > 1024 ? 4 : 1)}%)`,
-    width: '100%',
-    marginLeft: window.innerWidth <= 1024 ? '0px' : '80px',
-  }}
->
+        className="flex transition-transform duration-500 ease-in-out "
+        style={{
+          transform: `translateX(-${(currentSlide * 100) / (window.innerWidth > 1024 ? 4 : 1)}%)`,
+          width: `${properties.length * (window.innerWidth > 1024 ? 33.33 : 100)}%`
+        }}
+      >
        {properties.map((property, index) => (
   <div
     key={property.id}
