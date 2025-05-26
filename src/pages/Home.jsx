@@ -528,19 +528,19 @@ const OaklandGreensWebsite = () => {
           className="text-center text-white z-20 mb-72 px-4 relative"
         >
           <h1
-  className="text-4xl md:text-6xl font-medium mb-4 hero leading-tight"
+  className="text-4xl md:text-6xl font-medium mb-4 leading-tight"
   style={{
-    fontWeight: '550',
-    fontSize: window.innerWidth <= 390 && window.innerHeight <= 844 ? '2rem' : '4rem',
+    fontWeight: 550,
+    fontSize: window.innerWidth <= 450 && window.innerHeight <= 1000 ? '2rem' : '4rem',
     marginTop: '20px',
   }}
 >
   Farmhouse Living<br />
   <span
-    style={{
-      fontSize: window.innerWidth <= 390 && window.innerHeight <= 844 ? '2rem' : '3.8rem',
-    }}
-  >
+  style={{
+    fontSize: window.innerWidth <= 450 && window.innerHeight <= 1000 ? '2rem' : '3.8rem',
+  }}
+>
     Like Never Before
   </span>
 </h1>
