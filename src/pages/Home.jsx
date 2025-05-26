@@ -533,6 +533,7 @@ const OaklandGreensWebsite = () => {
         </div>
       </div>
 
+      {/* Hero Section */}
       <section className="relative h-screen bg-gradient-to-b from-blue-400 to-blue-100 pt-24 pb-10 opacity-110">
         <div className="absolute inset-0 pt-4 z-0">
           <div className="relative h-full flex justify-center items-center mt-8">
@@ -594,6 +595,62 @@ const OaklandGreensWebsite = () => {
         </motion.div>
       </section>
 
+      {/* Features Section - After Hero */}
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h3 className="text-sm tracking-widest text-gray-500 mb-2">FEATURES</h3>
+            <h2 className="text-4xl md:text-5xl font-semibold mb-4" style={{fontFamily: 'Manrope, sans-serif'}}>Refine Your Living</h2>
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              Radisson Blu Resort Murree offers a perfect blend of serene mountain views and modern comforts for an unforgettable stay.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8 md:gap-12 place-items-center">
+            {/* Feature 1 */}
+            <div className="flex flex-col items-center">
+              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300&h=300&fit=crop" alt="Eco Community" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
+              <span className="text-center text-base font-medium">Certified Eco-Community<br /><span className="text-xs font-normal text-gray-500">Carbon-certified, sustainable development</span></span>
+            </div>
+            {/* Feature 2 */}
+            <div className="flex flex-col items-center">
+              <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?w=300&h=300&fit=crop" alt="Lake & Golf" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
+              <span className="text-center text-base font-medium">Scenic Lake & Golf Club<br /><span className="text-xs font-normal text-gray-500">Recreation and tranquility intertwined</span></span>
+            </div>
+            {/* Feature 3 */}
+            <div className="flex flex-col items-center">
+              <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=300&h=300&fit=crop" alt="Farmhouse Plots" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
+              <span className="text-center text-base font-medium">4-Kanal Farmhouse Plots<br /><span className="text-xs font-normal text-gray-500">Generously sized private estates</span></span>
+            </div>
+            {/* Feature 4 */}
+            <div className="flex flex-col items-center">
+              <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=300&h=300&fit=crop" alt="Luxury Clubhouses" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
+              <span className="text-center text-base font-medium">Luxury Clubhouses<br /><span className="text-xs font-normal text-gray-500">Fine dining, fitness, events, and leisure</span></span>
+            </div>
+            {/* Feature 5 */}
+            <div className="flex flex-col items-center">
+              <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=300&h=300&fit=crop" alt="Wellness Focused" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
+              <span className="text-center text-base font-medium">Wellness Focused<br /><span className="text-xs font-normal text-gray-500">Yoga rooms, hiking trails, and open-air serenity</span></span>
+            </div>
+            {/* Feature 6 */}
+            <div className="flex flex-col items-center">
+              <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=300&h=300&fit=crop" alt="Renewable Energy" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
+              <span className="text-center text-base font-medium">Renewable Energy<br /><span className="text-xs font-normal text-gray-500">Solar panels and wind turbines</span></span>
+            </div>
+            {/* Feature 7 */}
+            <div className="flex flex-col items-center">
+              <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=300&h=300&fit=crop" alt="Exclusive Membership" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
+              <span className="text-center text-base font-medium">Exclusive Membership<br /><span className="text-xs font-normal text-gray-500">Limited, handpicked community</span></span>
+            </div>
+            {/* Feature 8 */}
+            <div className="flex flex-col items-center">
+              <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?w=300&h=300&fit=crop" alt="Strategic Location" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
+              <span className="text-center text-base font-medium">Strategic Location<br /><span className="text-xs font-normal text-gray-500">10 mins from Islamabad, 0 km to hospital, 3 km to Taxila Museum</span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* It's Luxury Living Section */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto luxury text-center px-6">
         <motion.h2
@@ -694,6 +751,7 @@ const OaklandGreensWebsite = () => {
         </div>
       </section>
 
+      {/* Property Slider Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-center mb-8 relative w-54 h-50" style={{ marginBottom: '110px', marginTop: '-50px' }}>
