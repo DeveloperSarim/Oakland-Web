@@ -597,8 +597,8 @@ const OaklandGreensWebsite = () => {
   viewport={{ once: true }}
   className="mx-4 w-37 h-14 overflow-hidden luxury flex items-center justify-center mt-2"
   style={{
-    width: window.innerWidth <= 768 ? '6rem' : '9.25rem',
-    height: window.innerWidth <= 768 ? '2.5rem' : '3.5rem',
+    width: window.innerWidth <= 768 ? '4rem' : '9.25rem',
+    height: window.innerWidth <= 768 ? '1.5rem' : '3.5rem',
   }}
 >
            
