@@ -8,6 +8,7 @@ import logoDark from '../assets/logo-dark.png';
 import aboutHero from '../assets/about-bg.JPG';
 import Payment_Plan from '../assets/Payment-Plan.pdf';
 import Oakland_presentation from '../assets/Oakland - Presentation.pdf';
+import './Career.css'
 
 const Careers = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

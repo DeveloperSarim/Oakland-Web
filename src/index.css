@@ -231,7 +231,11 @@ a {
 .text-5xl {
     font-size: 1.5rem;
   }
-
+.foot{
+  display: flex !important;
+  flex-direction: row !important;
+ }
+  
   .homes{
     margin-top: 100px;
   }
@@ -405,4 +409,19 @@ a {
   footer .text-sm {
     font-size: 0.65rem;
   }
+}
+
+@media (max-width: 770px) {
+  .foot{
+  display: flex !important;
+  flex-direction: row !important;
+ }
+
+   .footers {
+
+    margin-bottom: 172px;
+  
+}
+
+  
 }

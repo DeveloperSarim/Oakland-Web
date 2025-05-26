@@ -1112,7 +1112,7 @@ const OaklandGreensWebsite = () => {
       </div>
 
       {/* ✅ Social Icons */}
-      <div className="flex icons space-x-4">
+      <div className="flex icons foot space-x-4">
         <a href="https://www.facebook.com/oaklandgreenspk/" className="hover:text-gray-300 text-black transition" target='_blank'>
           <Facebook size={20} />
         </a>

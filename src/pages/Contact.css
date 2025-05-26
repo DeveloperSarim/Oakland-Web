@@ -372,3 +372,17 @@
     font-size: 0.65rem;
   }
 }
+
+
+@media (max-width: 770px) {
+  .foot{
+  display: flex !important;
+  flex-direction: row !important;
+ }
+
+   .footers {
+
+    margin-bottom: 172px;
+  
+}
+}
