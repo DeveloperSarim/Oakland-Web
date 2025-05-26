@@ -165,11 +165,11 @@ const About = () => {
        Welcome to Oakland Greens -<br></br> where luxury meets tranquility.
       </h2>
 
-      <p className="text-lg font-medium mb-4">Serene Stays Amidst Murree's Mountain Bliss</p>
+      <p className="text-lg font-medium mb-4">Serene Stays Amidst Margalla Mountain Bliss</p>
 
       <p className="text-gray-700 mb-4">
-        <strong>Nestled amidst nature yet conveniently</strong><br />
-       accessible from the city, Oakland Greens redefines farmhouse living with elegance, privacy, and modern comfort. Our vision is to create a peaceful sanctuary where families can unwind, reconnect, and experience the finest in eco-luxury lifestyle.
+        <strong>Crafted for the Few Who Know the Difference</strong><br />
+        Nestled at the foot of the Margalla Hills, Oakland Greens is a gated farmhouse community designed for those who value nature, privacy, and elevated living. With roots in cultural heritage and eyes set on sustainable innovation, we offer a sanctuary where every detail is a reflection of excellence.
       </p>
 
       <p className="text-gray-700 mb-4">
@@ -178,24 +178,21 @@ const About = () => {
       </p>
 
       <p className="text-gray-700 mb-6">
-    Whether you're looking for a private weekend escape, a secure investment, or a legacy home — Oakland Greens delivers unmatched serenity, style, and value.
-      </p>
+      Live among lush green landscapes, breathe cleaner air, and enjoy the timeless beauty of countryside life, without compromising on luxury or convenience.      </p>
 
       {/* Amenities list */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-800 font-medium">
         <ul className="list-disc list-inside space-y-1">
-          <li>Fine Dining</li>
-          <li>Spa & Fitness Center</li>
-          <li>Infinity Pools</li>
-          <li>Trekking & Adventure Parks</li>
+          <li>Certified Eco-Community </li>
+          <li>Scenic Lake & Golf Club</li>
+          <li>4-Kanal Farmhouse Plots</li>
+          <li>Luxury Clubhouses</li>
         </ul>
         <ul className="list-disc list-inside space-y-1">
-          <li>Kids' Play Areas</li>
-          <li>Banquet & Conference Facilities</li>
-          <li>Indoor Games</li>
-          <li>Eco-Friendly Design</li>
-          <li>Concierge Services</li>
-          <li>Retail & Shopping Experiences</li>
+          <li>Wellness Focused</li>
+          <li>Renewable Energy </li>
+          <li>Exclusive Membership </li>
+          <li>Strategic Location </li>
         </ul>
       </div>
 

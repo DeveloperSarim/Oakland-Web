@@ -633,17 +633,17 @@ const OaklandGreensWebsite = () => {
             </div>
             {/* Feature 6 */}
             <div className="flex flex-col items-center">
-              <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=300&h=300&fit=crop" alt="Renewable Energy" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
+              <img src="https://c1.wallpaperflare.com/preview/983/26/531/solar-panel-array-power-sun-electricity.jpg?w=300&h=300&fit=crop" alt="Renewable Energy" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
               <span className="text-center text-base font-medium">Renewable Energy<br /><span className="text-xs font-normal text-gray-500">Solar panels and wind turbines</span></span>
             </div>
             {/* Feature 7 */}
             <div className="flex flex-col items-center">
-              <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=300&h=300&fit=crop" alt="Exclusive Membership" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
+              <img src="https://img.freepik.com/free-photo/receptionist-elegant-suit-work-hours-with-customer_23-2149714444.jpg?w=300&h=300&fit=crop" alt="Exclusive Membership" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
               <span className="text-center text-base font-medium">Exclusive Membership<br /><span className="text-xs font-normal text-gray-500">Limited, handpicked community</span></span>
             </div>
             {/* Feature 8 */}
             <div className="flex flex-col items-center">
-              <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?w=300&h=300&fit=crop" alt="Strategic Location" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
+              <img src="https://www.researchgate.net/publication/319903812/figure/fig6/AS:668803482533889@1536466584073/The-Faisal-Mosque-Islamabad-Pakistan.ppm?w=300&h=300&fit=crop" alt="Strategic Location" className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover mb-3 shadow-lg" />
               <span className="text-center text-base font-medium">Strategic Location<br /><span className="text-xs font-normal text-gray-500">10 mins from Islamabad, 0 km to hospital, 3 km to Taxila Museum</span></span>
             </div>
           </div>
