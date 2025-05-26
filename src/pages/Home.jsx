@@ -103,10 +103,10 @@ const PropertySlider = () => {
   }, []);
 
   return (
-     <div className="w-full max-w-7xl mx-auto py-8 px-4 bg-white">
-      <div className="relative h-96 flex items-center justify-center">
-        {/* Left Side Property - Faded */}
-        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-80 h-64 z-10">
+       <div className="w-full max-w-7xl mx-auto py-8 px-4 bg-white">
+      <div className="relative h-96 flex items-center justify-center lg:justify-between lg:px-20">
+        {/* Left Side Property - Faded (Hidden on mobile) */}
+        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-72 h-64 z-10 hidden lg:block">
           <div className="relative h-full rounded-2xl overflow-hidden">
             <img
               src={properties[(currentSlide - 1 + properties.length) % properties.length].image}
@@ -128,7 +128,7 @@ const PropertySlider = () => {
         </div>
 
         {/* Center Property - Fully Visible and Prominent */}
-        <div className="relative z-20 w-108 h-80">
+        <div className="relative z-20 w-full max-w-sm mx-auto lg:w-96 lg:max-w-none h-80">
           <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl">
             <img
               src={properties[currentSlide].image}
@@ -141,10 +141,10 @@ const PropertySlider = () => {
           
           {/* Center property info - fully visible */}
           <div className="pt-6 text-center">
-            <div className="text-3xl font-light text-gray-900 mb-2">
+            <div className="text-2xl lg:text-3xl font-light text-gray-900 mb-2">
               {properties[currentSlide].price}
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">
+            <h3 className="text-lg lg:text-xl font-semibold text-gray-900 mb-3">
               {properties[currentSlide].name}
             </h3>
             <div className="flex items-center justify-center space-x-4 text-sm text-gray-600 mb-3">
@@ -152,14 +152,14 @@ const PropertySlider = () => {
               <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
               <span>{properties[currentSlide].bathrooms} bathrooms</span>
             </div>
-            <p className="text-gray-600 text-sm max-w-sm mx-auto leading-relaxed">
+            <p className="text-gray-600 text-sm max-w-sm mx-auto leading-relaxed px-4 lg:px-0">
               {properties[currentSlide].description}
             </p>
           </div>
         </div>
 
-        {/* Right Side Property - Faded */}
-        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-80 h-64 z-10">
+        {/* Right Side Property - Faded (Hidden on mobile) */}
+        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-72 h-64 z-10 hidden lg:block">
           <div className="relative h-full rounded-2xl overflow-hidden">
             <img
               src={properties[(currentSlide + 1) % properties.length].image}
@@ -183,31 +183,31 @@ const PropertySlider = () => {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-all duration-200 z-30"
+          className="absolute left-2 lg:left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 lg:w-12 lg:h-12 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-all duration-200 z-30"
           disabled={isTransitioning}
         >
-          <ChevronLeft size={20} className="text-white" />
+          <ChevronLeft size={16} className="text-white lg:w-5 lg:h-5" />
         </button>
         
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-all duration-200 z-30"
+          className="absolute right-2 lg:right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 lg:w-12 lg:h-12 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-all duration-200 z-30"
           disabled={isTransitioning}
         >
-          <ChevronRight size={20} className="text-white" />
+          <ChevronRight size={16} className="text-white lg:w-5 lg:h-5" />
         </button>
       </div>
 
       {/* Dots Indicator */}
-      <div className="flex justify-center mt-48 space-x-2">
+      <div className="flex justify-center mt-8 lg:mt-48 space-x-2">
         {properties.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
             className={`transition-all duration-300 rounded-full ${
               currentSlide === index 
-                ? 'w-8 h-3 bg-black' 
-                : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
+                ? 'w-6 h-2 lg:w-8 lg:h-3 bg-black' 
+                : 'w-2 h-2 lg:w-3 lg:h-3 bg-gray-300 hover:bg-gray-400'
             }`}
           />
         ))}
@@ -786,7 +786,7 @@ const OaklandGreensWebsite = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 prime bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div 
             className="text-center mb-16"
