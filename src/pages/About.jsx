@@ -145,7 +145,8 @@ const About = () => {
       <section
         className="relative w-full h-screen bg-cover bg-center"
         style={{
-          backgroundImage: `url(${aboutHero})`
+          backgroundImage: `url(${aboutHero})`,
+          height: '75vh',
         }}
       >
         {/* Optional overlay */}
@@ -252,23 +253,24 @@ Take a glimpse into your future home — designed to inspire, built to last.
         className="relative mt-4 min-h-screen flex items-center justify-center overflow-hidden"
         style={{
           backgroundImage: `url(${footer_back})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="absolute inset-0 flex items-end justify-center">
+        <div className="absolute inset-0 flex items-end justify-center ">
           <div className="flex space-x-8">
             <img
               src={footer}
-              alt="House"
-              className="w-22 h-60 flex align-end object-cover rounded-lg opacity-80"
+              alt="House 1"
+              className="w-22 h-80 flex align-end object-cover rounded-lg opacity-80"
+              style={{ height: '500px' }}
             />
           </div>
         </div>
-
+      
         <motion.div
-          className="relative z-10 text-center text-white px-4"
+          className="relative z-10 text-center text-white px-4 footers"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -284,7 +286,7 @@ Take a glimpse into your future home — designed to inspire, built to last.
             Your dream <br />
             home awaits.
           </motion.h2>
-
+      
           <motion.p
             className="text-lg md:text-xl mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
@@ -295,35 +297,41 @@ Take a glimpse into your future home — designed to inspire, built to last.
             Whether you're exploring our homes or envisioning something custom,
             we're here to bring your dream to life.
           </motion.p>
-
-          <button className="bg-white text-black px-8 py-2 rounded-2xl text-md">
-            Get Plan
-          </button>
+      
+          <a
+            href={Oakland_presentation}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white text-black px-8 py-2 rounded-2xl text-md inline-block hover:bg-gray-100 transition-colors duration-300"
+          >
+            View Presentation
+          </a>
         </motion.div>
-
-        <footer className="absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-            <div className="flex space-x-8">
-              <a href="#" className="hover:text-gray-300 transition">Contact</a>
+      
+        <footer className="absolute  bottom-0 left-0 right-0 backdrop-blur-sm bg-black/30 text-white py-8 z-20">
+          <div className="max-w-7xl  mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+            <div className="flex foot space-x-8">
+              <a href="#" className="hover:text-gray-300  transition">Contact</a>
               <a href="#" className="hover:text-gray-300 transition">Privacy Policy</a>
               <a href="#" className="hover:text-gray-300 transition">Terms</a>
             </div>
-
-            <div className="flex space-x-4">
-              <a href="#" className="hover:text-gray-300 transition">
+      
+            {/* ✅ Social Icons */}
+            <div className="flex icons space-x-4">
+              <a href="https://www.facebook.com/oaklandgreenspk/" className="hover:text-gray-300 text-black transition" target='_blank'>
                 <Facebook size={20} />
               </a>
-              <a href="#" className="hover:text-gray-300 transition">
+              <a href="#" className="hover:text-gray-300 text-black transition" target='_blank'>
                 <Instagram size={20} />
               </a>
-              <a href="#" className="hover:text-gray-300 transition">
+              <a href="#" className="hover:text-gray-300 text-black transition" target='_blank'>
                 <Twitter size={20} />
               </a>
-              <a href="#" className="hover:text-gray-300 transition">
+              <a href="#" className="hover:text-gray-300 text-black transition" target='_blank'>
                 <Linkedin size={20} />
               </a>
             </div>
-
+      
             <div className="text-sm text-white text-center md:text-right">
               © 2025 Oakland Greens. All rights reserved.
             </div>

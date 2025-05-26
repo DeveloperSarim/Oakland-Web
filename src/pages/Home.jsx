@@ -103,76 +103,112 @@ const PropertySlider = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden h-full" style={{height: '516px'}}>
-      {/* Left Fade */}
-      <div className="hidden md:block pointer-events-none absolute left-0 top-0 h-full w-20 z-20" style={{background: 'linear-gradient(to right, #fff 10%, transparent 80%)'}}></div>
-      {/* Right Fade */}
-      <div className="hidden md:block pointer-events-none absolute right-0 top-0 h-full w-20 z-20" style={{background: 'linear-gradient(to left, #fff 10%, transparent 80%)'}}></div>
-      <div
-  className="flex transition-transform duration-500 ease-in-out"
-  style={{
-    transform: `translateX(-${(currentSlide * 100) / (window.innerWidth > 1024 ? 4 : 1)}%)`,
-    width: '100%',
-    marginLeft: window.innerWidth <= 1024 ? '0px' : '80px',
-  }}
->
-       {properties.map((property, index) => (
-  <div
-    key={property.id}
-    className="flex-shrink-0 w-full lg:w-1/3 px-3"
-    style={{ width: window.innerWidth > 1024 ? '33.33%' : '100%' }}
-  >
-    <div className="relative group cursor-pointer h-80">
-      <div className={`h-full  bg-gradient-to-br ${property.gradient} rounded-2xl overflow-hidden relative shadow-lg hover:shadow-xl transition-all duration-300`}>
-        <img
-          src={property.image}
-          alt={property.name}
-          className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-300"
-        />
-        <div className={`absolute inset-0 bg-gradient-to-br ${property.gradient} opacity-60`}></div>
+     <div className="w-full max-w-7xl mx-auto py-8 px-4 bg-white">
+      <div className="relative h-96 flex items-center justify-center">
+        {/* Left Side Property - Faded */}
+        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-80 h-64 z-10">
+          <div className="relative h-full rounded-2xl overflow-hidden">
+            <img
+              src={properties[(currentSlide - 1 + properties.length) % properties.length].image}
+              alt="Previous property"
+              className="w-full h-full object-cover opacity-30"
+            />
+            {/* Strong blur effect */}
+            <div className="absolute inset-0 backdrop-blur-md"></div>
+          </div>
+          {/* Left property info - softly faded */}
+          <div className="pt-4 opacity-60">
+            <div className="text-lg font-light text-gray-700">
+              {properties[(currentSlide - 1 + properties.length) % properties.length].price}
+            </div>
+            <h3 className="text-sm font-medium text-gray-600 mt-1">
+              {properties[(currentSlide - 1 + properties.length) % properties.length].name}
+            </h3>
+          </div>
+        </div>
 
-        <button className="absolute top-4 right-4 w-10 h-10 bg-black/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
-          <ArrowRight size={18} />
+        {/* Center Property - Fully Visible and Prominent */}
+        <div className="relative z-20 w-108 h-80">
+          <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl">
+            <img
+              src={properties[currentSlide].image}
+              alt={properties[currentSlide].name}
+              className="w-full h-full object-cover"
+            />
+            {/* Subtle gradient overlay for the main image */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+          </div>
+          
+          {/* Center property info - fully visible */}
+          <div className="pt-6 text-center">
+            <div className="text-3xl font-light text-gray-900 mb-2">
+              {properties[currentSlide].price}
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">
+              {properties[currentSlide].name}
+            </h3>
+            <div className="flex items-center justify-center space-x-4 text-sm text-gray-600 mb-3">
+              <span>{properties[currentSlide].bedrooms} bedrooms</span>
+              <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+              <span>{properties[currentSlide].bathrooms} bathrooms</span>
+            </div>
+            <p className="text-gray-600 text-sm max-w-sm mx-auto leading-relaxed">
+              {properties[currentSlide].description}
+            </p>
+          </div>
+        </div>
+
+        {/* Right Side Property - Faded */}
+        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-80 h-64 z-10">
+          <div className="relative h-full rounded-2xl overflow-hidden">
+            <img
+              src={properties[(currentSlide + 1) % properties.length].image}
+              alt="Next property"
+              className="w-full h-full object-cover opacity-30"
+            />
+            {/* Strong blur effect */}
+            <div className="absolute inset-0 backdrop-blur-md"></div>
+          </div>
+          {/* Right property info - softly faded */}
+          <div className="pt-4 opacity-60 text-right">
+            <div className="text-lg font-light text-gray-700">
+              {properties[(currentSlide + 1) % properties.length].price}
+            </div>
+            <h3 className="text-sm font-medium text-gray-600 mt-1">
+              {properties[(currentSlide + 1) % properties.length].name}
+            </h3>
+          </div>
+        </div>
+
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-all duration-200 z-30"
+          disabled={isTransitioning}
+        >
+          <ChevronLeft size={20} className="text-white" />
+        </button>
+        
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-all duration-200 z-30"
+          disabled={isTransitioning}
+        >
+          <ChevronRight size={20} className="text-white" />
         </button>
       </div>
 
-      {/* 🔽 All text including price, name, etc. moved here */}
-      <div className="p-2 py-2 mt-4 transform transition-all duration-300">
-        <div className="text-2xl font-light text-black mb-1">{property.price}</div>
-        <h3 className="text-lg font-semibold text-black mb-1">{property.name}</h3>
-        <div className="flex space-x-3 text-sm text-gray-600 mb-2">
-          <span>{property.bedrooms} bed</span>
-          <span>{property.bathrooms} bath</span>
-        </div>
-        <p className="text-gray-600 text-sm">{property.description}</p>
-      </div>
-    </div>
-  </div>
-))}
-
-      </div>
-
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105 z-40"
-        disabled={isTransitioning}
-      >
-        <ChevronLeft size={20} />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-200 hover:scale-105 z-40"
-        disabled={isTransitioning}
-      >
-        <ChevronRight size={20} />
-      </button>
-
-      <div className="flex justify-center mt-44 space-x-2">
+      {/* Dots Indicator */}
+      <div className="flex justify-center mt-48 space-x-2">
         {properties.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-black w-8' : 'bg-gray-300 hover:bg-gray-400'}`}
+            className={`transition-all duration-300 rounded-full ${
+              currentSlide === index 
+                ? 'w-8 h-3 bg-black' 
+                : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
+            }`}
           />
         ))}
       </div>
