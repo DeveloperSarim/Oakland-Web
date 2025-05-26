@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ChevronDown, ArrowRight , Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import home from '../assets/home_1.png';
-import nature from '../assets/Nature.png';
+import nature from '../assets/Nature_1.png';
 import luxury from '../assets/luxury.png';
 import footer from '../assets/footer-1.png';
 import footer_back from '../assets/footer-back.jpg';
@@ -560,15 +560,19 @@ const OaklandGreensWebsite = () => {
 
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto luxury text-center px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-5xl font-semibold mb-2 mt-20"
-          >
-            It's Luxury Living
-          </motion.h2>
+        <motion.h2
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  viewport={{ once: true }}
+  className="text-5xl font-semibold mb-2 mt-20"
+  style={{
+    fontSize: window.innerWidth <= 768 ? '1.5rem' : '3.8rem',
+    fontWeight: '600',
+  }}
+>
+  It's Luxury Living
+</motion.h2>
 
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -577,29 +581,47 @@ const OaklandGreensWebsite = () => {
             viewport={{ once: true }}
             className="flex items-center  justify-center mb-8 nature"
           >
-            <span className="text-5xl font-semibold">Embraced by</span>
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="mx-4 w-24 h-12 rounded-full overflow-hidden luxury flex items-center justify-center shadow-md border"
-            >
+            <span
+  className="text-5xl font-semibold ml-2"
+  style={{
+    fontSize: window.innerWidth <= 768 ? '1.5rem' : '3.8rem',
+    fontWeight: '600',
+  }}
+>
+  Embraced by
+</span>
+<motion.div
+  initial={{ scale: 0.8, opacity: 0 }}
+  whileInView={{ scale: 1, opacity: 1 }}
+  transition={{ duration: 0.6, delay: 0.4 }}
+  viewport={{ once: true }}
+  className="mx-4 w-37 h-14 overflow-hidden luxury flex items-center justify-center mt-2"
+  style={{
+    width: window.innerWidth <= 768 ? '6rem' : '9.25rem',
+    height: window.innerWidth <= 768 ? '2.5rem' : '3.5rem',
+  }}
+>
+           
               <img
   src={nature}  // Replace with the actual image source
   alt="Nature"
   className="w-full h-full object-cover"
-  style={{
-    clipPath: 'polygon(0% 5%, 10% 0%, 90% 0%, 100% 5%, 100% 95%, 90% 100%, 10% 100%, 0% 95%)', // Leaf-like shape with rounded corners and slight extension
-    objectFit: 'cover',
-  }}
+  
 />
 
-
+<br />
 
 
             </motion.div>
-            <span className="text-5xl font-semibold">Nature.</span>
+            <span
+  className="text-5xl font-semibold mr-2"
+  style={{
+    fontSize: window.innerWidth <= 768 ? '1.5rem' : '3.8rem',
+    fontWeight: '500',
+  }}
+>
+  Nature.
+</span>
           </motion.div>
 
           <motion.p
@@ -609,9 +631,9 @@ const OaklandGreensWebsite = () => {
             viewport={{ once: true }}
             className="text-gray-600 mb-12 max-w-2xl mx-auto"
           >
-            Oakland Greens offers more than a home—it's a lifestyle. Crafted with precision and
-            surrounded by nature, each farmhouse reflects your unique style, blending luxury and
-            tranquility in perfect harmony.
+            Oakland Greens isn't just a home—it's a lifestyle. With precision craftsmanship and natural surroundings,
+            each farmhouse blends luxury and tranquility.
+
           </motion.p>
 
           <motion.div
