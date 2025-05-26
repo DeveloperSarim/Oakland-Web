@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ChevronDown, ArrowRight , Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
-import home from '../assets/home_1.png';
+import home from '../assets/hero_image_2.png';
 import nature from '../assets/Nature_1.png';
 import luxury from '../assets/luxury.png';
 import footer from '../assets/footer-1.png';
@@ -499,7 +499,7 @@ const OaklandGreensWebsite = () => {
 
       <section className="relative h-screen bg-gradient-to-b from-blue-400 to-blue-100 pt-24 pb-10 opacity-110">
         <div className="absolute inset-0 pt-4 z-0">
-          <div className="relative h-full flex justify-center items-center">
+          <div className="relative h-full flex justify-center items-center mt-8">
             <img
               src={home}
               alt="Home"
